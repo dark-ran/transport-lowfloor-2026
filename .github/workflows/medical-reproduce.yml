@@ -51,6 +51,8 @@ jobs:
             medical/results/headway_*.json
             medical/results/feasibility_*.csv
             medical/results/feasibility_*.json
+            medical/results/toy_*.csv
+            medical/results/toy_*.json
             medical/results/route_case_brief.md
             medical/results/validation_v2_receipt.json
           if-no-files-found: error
@@ -75,6 +77,7 @@ jobs:
           git add medical/results/cap5_*.csv medical/results/cap5_*.json
           git add medical/results/headway_*.csv medical/results/headway_*.json
           git add medical/results/feasibility_*.csv medical/results/feasibility_*.json
+          git add medical/results/toy_*.csv medical/results/toy_*.json
           git add medical/results/route_case_brief.md medical/results/validation_v2_receipt.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
