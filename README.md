@@ -65,6 +65,7 @@ python medical/reproduce_all.py
 - [핵심 공유노선 지수 코드](medical/analyze_medical.py)
 - [배분표 고정 검증](medical/decision_stress.py) 및 [공개 CSV](medical/results/fixed_allocation_stress.csv)
 - [교체 상한 및 형평성 확장 코드](medical/policy_extension.py)
+- [추천 노선이 실제 지수 변화에 기여하는 동–병원 쌍의 정적 반사실 비교](medical/route_marginal.py)
 - [추천 노선 병원행·귀가행 제한적 확인](medical/allocated_route_pilot.py)
 - [초기 저상버스 보유율 분석 전문](docs/initial_analysis.md) — 기존 분석은 삭제하지 않고 보존
 
