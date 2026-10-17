@@ -41,7 +41,7 @@ def main():
     changes = pd.read_csv(out / "cap_dong_changes.csv", dtype={"code": str})
     changes = changes[(changes.policy == "screened_cap_5") & (changes.delta_index > 1e-10)]
     improved = changes.set_index("code")
-    pairs = m["pairs"]
+    pairs = pd.read_csv(out / "cap5_route_marginal_pairs.csv", dtype={"route": str, "dong_code": str, "hospital_id": str})
     h = pd.read_csv(ROOT / "data/hospitals.csv", dtype={"hospital_id": str}).set_index("hospital_id")
     selected = {}
     for route in json.loads((ROOT / "raw/current_case_stops.json").read_text(encoding="utf-8")):
@@ -52,20 +52,16 @@ def main():
         selected.setdefault(label, []).append(df)
     live = {str(r["routId"]): r for r in json.loads(
         (ROOT / "raw/topis_case_metadata.json").read_text(encoding="utf-8"))}
-    route_index = {str(r): i for i, r in enumerate(m["f"].route)}
     origin_index = {str(code): i for i, code in enumerate(origins.code.astype(str))}
     rows = []
     n_pairs_considered = 0
     for a in allocations.itertuples():
         if a.route not in selected:
             continue  # absent from a NON-exhaustive 69-route archive, not evidence of no service
-        j = route_index[a.route]
-        possible = pairs[pairs.dong_code.astype(str).isin(improved.index)].copy()
-        possible = possible[possible.apply(
-            lambda p: bool(m["C"][origin_index[str(p.dong_code)] * m["k"] + int(p["rank"]) - 1, j]), axis=1)]
-        possible["priority"] = possible.dong_code.astype(str).map(
-            lambda code: float(improved.loc[code, "delta_index"] * improved.loc[code, "seniors"]))
-        # At most 12 pairs per route; this is a small, nonrepresentative pilot.
+        possible = pairs[(pairs.route == a.route) & (pairs.dong_code.isin(improved.index))].copy()
+        possible["priority"] = possible.population_weighted_pair_loss
+        # Top 12 policy-relevant pairs per route by leave-one-out weighted loss;
+        # still only a small, nonrepresentative subset of an old route snapshot.
         for pair in possible.sort_values("priority", ascending=False).head(12).itertuples():
             n_pairs_considered += 1
             o = origins.iloc[origin_index[str(pair.dong_code)]]
