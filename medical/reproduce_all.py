@@ -23,6 +23,7 @@ STAGES = [
     "policy_extension.py",
     "audit_policy_extension.py",
     "plot_policy_extension.py",
+    "route_marginal.py",
     "allocated_route_pilot.py"
 ]
 
