@@ -1,0 +1,32 @@
+{
+  "input_model_pairs": 1278,
+  "dong_count": 426,
+  "hospital_pairs_per_dong": 3,
+  "headway_matched_model_routes": 293,
+  "pair_classes": [
+    {
+      "class": "matched_shared_route",
+      "pairs": 903,
+      "weight": 0.7061803471819708
+    },
+    {
+      "class": "no_shared_route",
+      "pairs": 328,
+      "weight": 0.2606663257968366
+    },
+    {
+      "class": "straight_walk_flag",
+      "pairs": 47,
+      "weight": 0.03315332702119264
+    }
+  ],
+  "full_model_population_weight_sum": 1.0,
+  "observable_weight_mass": 0.7393336742031633,
+  "unobserved_weight_mass": 0.2606663257968366,
+  "all_three_nearest_hospital_pairs_without_shared_route_dongs": 37,
+  "unconnected_interpretation": "No model-shared bus route at the specified 500m straight-line endpoints; not proof of impossible travel",
+  "comparison": "All policies evaluated on same full 426 x 3 pairs; conditional values divide by same observable mass",
+  "max_mode": "Select highest single shared-route proxy value",
+  "saturated_union_mode": "1-product(1-route proxy value), a non-probabilistic sensitivity heuristic; route arrivals are not independent",
+  "caution": "Not actual wheelchair accessible path, wait time, low-floor frequency, trip success, or deployment effect"
+}

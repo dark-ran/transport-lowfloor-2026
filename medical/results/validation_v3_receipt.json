@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "note": "Passing offline reproducibility tests; NOT independent validation of real-world bus accessibility.",
+  "source_git_commit_environment": "5ee443e7a19c9e935a2bd8ffb9f055b6731248d3",
+  "python": "3.12.15",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "packages": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "matplotlib": "3.11.2",
+    "scikit-learn": "1.9.1",
+    "shapely": "2.2.0",
+    "pyproj": "3.8.0"
+  },
+  "raw_snapshot_sha256": {
+    "current_case_stops.json": "563dc4337d7ef0081c33f63b623389f9fd2a627c8f8cf5f5eb807d171b818091",
+    "exception_routes_2026.json": "f12669ba51f76cd373ef6d765f71b6265bc307bb6ad80a25ea5fa3e63bd5220d",
+    "topis_case_metadata.json": "46358445dae0a4f6a63e39200fec8f729900a779cd203778132e6ac1fb8e5cc2",
+    "고령자현황_2025Q2.csv": "a5042c9d0f2a0092c6ef0a03bc7c429f37221c36fdb32ae460099935e72b68d7",
+    "노선정류소_20250513.xlsx": "72bb723f109ab977c3fb72221d2bb5a32f6b6348341ba86d82ce536da9b9237b",
+    "노선정보_20261017.csv": "ff616957cb3e16443bad2b84f5be4980cfa615a5323eb4649c26f3c30e2f9074",
+    "병원_인허가_20261017.csv": "45568ec554b8c75caf150af13f46b4f202a26a91d8c4cdfd2062c7dc1cdfe913",
+    "서울시_저상버스_20250425.xlsx": "de310eeffd3d2437139f9f4fe192b9b969af9e8a1546f31153494d08b78761f4",
+    "행정동경계_서울_20250401.geojson": "9597cd1b341485a6d2e59a154c6827af21faa96a8ab52fd118dd844345dcded8",
+    "행정동경계_이용조건.txt": "d892791d5ba176e3bb7cc178937b26d3b33e2ad19da581af168c9e48428ba507"
+  },
+  "required_analysis_output_sha256": {
+    "cap_equity_summary.csv": "fa27938f336ea9ff2c0faf8049405e1aa780eb44722434e996e31633a26da213",
+    "cap_equity_audit.json": "d8539b62795e7e4176be530bcd88f675d7016000820871d15b55a6f41a412e17",
+    "headway_matched_routes.csv": "af40ca2cae5e64c9730e648f62e7f91fa9b4acd56c92c46dcbd35a796426dea7",
+    "headway_proxy_sensitivity.csv": "3c7e20decd98b3cba31af9687bf5a20daf2a1f68060ec20aaae0c1422a81d3ac",
+    "headway_proxy_metadata.json": "fa7db16920db69de427d76703949c8c21be3fa3fcabd3236055fe56a823f7aa3",
+    "headway_proxy_audit.json": "1c4f39901fb5aa00892fba9958aa6fc0ed9294bc4fd3f064f52762d085c2db7e",
+    "headway_policy_coverage.csv": "c31f6acb8a8674e02a7f90579830b217230f24f083e657ec8e5f01e92539af63",
+    "feasibility_assumption_stress.csv": "3e361d45b4fb9fd026896e69875e098dd9d2ae4cae3804902968fbdb29279f8c",
+    "feasibility_assumption_allocations.csv": "283749f81abca7ec13d1202be809705a054f3dbbea88bfd74a1a17ac2d7e05a4",
+    "feasibility_assumption_metadata.json": "dfe2377ea02cce1d2dd6e7c21b387cc4c219e874cedc6f4be121b07be9c42b0a",
+    "toy_greedy_exact.csv": "70f1e41870b60531e0e8438958bd3ec45a395ea7e996ea878b90775ac1cfe81a",
+    "toy_greedy_exact_summary.json": "39a47df91aee34bd1ac09a2bc5d5486624e85e8c6ed64ce0c2e7615ff4a5cea3",
+    "route_case_brief.md": "e053bdf45c0a6ffddb753689db1c1a30e021ad6dd29a444722e883827ddd2336",
+    "cap5_route_pilot_candidates.csv": "428dc4494174edd7865e7596f2c9f58229faa835cfbb9ec14297d45b51a9461c",
+    "cap5_route_marginal_pairs.csv": "024c4487a2212503758668de7b93a3c9d6b0975ca2a4daf7b645a1db34c54482",
+    "v3_denominator_multiroute.csv": "2f5cca7b8f9426d544d0b5af701907fac9dd4c2cb837db81bdb2101f603897db",
+    "v3_pair_classification.csv": "94299aac1a85242a726a082b09f8700f6ef468e1a833754c64433ee8b8031483",
+    "v3_denominator_metadata.json": "547ccc09455919db2c87b88f86a971a963e071a3b9714c9a275f1a22aa562b53",
+    "v3_denominator_audit.json": "4ae89574e94d4253b989b1c992dbf70d15766fadc91f1449791d6bdc670f8868",
+    "v3_policy_brief.md": "9d47e50df7c5a7935391ad1b9b94bd3da6ebcc3c87f11a0dd081858a23b6c78e"
+  },
+  "test_policy_scenario_recalculations": 56,
+  "outputs": 20,
+  "method_limits": [
+    "Mixed 2025/2026 archived public sources",
+    "Nominal headway penalty is not actual low-floor bus waiting time",
+    "Eligibility shares 25/50/100% are sensitivity assumptions",
+    "No observed wheelchair trip, real walking route or financial costing"
+  ]
+}

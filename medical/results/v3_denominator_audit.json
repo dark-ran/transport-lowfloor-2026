@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "compared_v2_proxy_policy_reference_rows": 27,
+  "checked_v3_policy_reference_modes": 54,
+  "pair_rows": 1278,
+  "max_proxy_reproduces_v2_observable_gain": true,
+  "shared_route_absence_does_not_improve_from_fleet_replacement": true,
+  "unconnected_is_model_limitation_not_real_trip_impossibility": true,
+  "observed_boarding_or_departure_data": false
+}

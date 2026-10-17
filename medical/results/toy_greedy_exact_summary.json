@@ -1,7 +1,7 @@
 {
   "passed": true,
   "toy_instance_count": 25,
-  "worst_relative_gain_vs_exhaustive": 0.9737533426799663,
+  "worst_relative_gain_vs_exhaustive": 0.9737533426799664,
   "average_relative_gain_vs_exhaustive": 0.9989501337071987,
   "any_suboptimal_toy_case": true,
   "cannot_generalize_to_real_network_optimum": true,
