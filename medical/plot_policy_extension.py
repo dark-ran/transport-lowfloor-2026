@@ -1,3 +1,4 @@
+from font_compat import korean_font
 """Generate presentation-ready plots from audited cap and equity CSV files."""
 from pathlib import Path
 import numpy as np
@@ -13,7 +14,7 @@ def main():
     out = ROOT / "results"
     a = pd.read_csv(out / "cap_equity_summary.csv")
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.9))
-    plt.rcParams.update({"font.family": "Malgun Gothic", "axes.unicode_minus": False})
+    plt.rcParams.update({"font.family": korean_font(), "axes.unicode_minus": False})
     for row in a.itertuples():
         label = "기존 의료우선" if row.policy == "의료연결 우선" else f"상한 {row.cap_per_route}"
         color = "#ba6636" if str(row.cap_per_route) == "5" else "#286e85"
