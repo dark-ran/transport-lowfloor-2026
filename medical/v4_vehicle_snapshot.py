@@ -135,6 +135,10 @@ def main():
     data=pd.read_csv(ROOT/"results/cap5_route_pilot_candidates.csv",dtype={"route":str})
     requests=manifest(data)
     if not args.capture:
+        (ROOT/"results/v4_capture_manifest.json").write_text(
+            json.dumps({"mode":"NO_CAPTURE_PERFORMED","requests":requests,
+                        "real_vehicle_observations":0,
+                        "no_credentials_embedded":True},ensure_ascii=False,indent=2),encoding="utf-8")
         print(json.dumps({"mode":"DRY_RUN_NO_CALLS",
                           "requests":[{k:v for k,v in r.items() if k!="purpose"} for r in requests],
                           "queries_executed":0,
