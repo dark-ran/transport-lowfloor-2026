@@ -24,6 +24,7 @@ STAGES = [
     "audit_policy_extension.py",
     "plot_policy_extension.py",
     "headway_proxy.py",
+    "audit_headway_proxy.py",
     "feasibility_assumptions.py",
     "route_marginal.py",
     "allocated_route_pilot.py",
