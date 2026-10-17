@@ -21,7 +21,10 @@ REQUIRED=[
  "cap5_route_marginal_pairs.csv",
  "v3_denominator_multiroute.csv","v3_pair_classification.csv",
  "v3_denominator_metadata.json","v3_denominator_audit.json",
- "v3_policy_brief.md"
+ "v3_policy_brief.md",
+ "v4_directional_pairs.csv","v4_directional_metadata.json",
+ "v4_implementation_gates.csv","v4_implementation_metadata.json",
+ "v4_capture_manifest.json","v4_evidence_audit.json","v4_decision_brief.md"
 ]
 
 
@@ -37,6 +40,8 @@ def main():
     assert eq["passed"] is True
     v3=json.loads((RESULTS/"v3_denominator_audit.json").read_text(encoding="utf-8"))
     assert v3["passed"] is True
+    v4=json.loads((RESULTS/"v4_evidence_audit.json").read_text(encoding="utf-8"))
+    assert v4["passed"] and v4["verified_boardings"]==0
     cap=pd.read_csv(RESULTS/"cap_equity_summary.csv")
     head=pd.read_csv(RESULTS/"headway_proxy_sensitivity.csv")
     feasibility=pd.read_csv(RESULTS/"feasibility_assumption_stress.csv")
@@ -63,9 +68,9 @@ def main():
           "No observed wheelchair trip, real walking route or financial costing"
       ]
     }
-    (RESULTS/"validation_v3_receipt.json").write_text(json.dumps(
+    (RESULTS/"validation_v4_receipt.json").write_text(json.dumps(
         receipt,ensure_ascii=False,indent=2),encoding="utf-8")
-    print("V3 RECEIPT PASSED; files:",len(files),"raw sources:",len(src))
+    print("V4 RECEIPT PASSED; files:",len(files),"raw sources:",len(src))
 
 
 if __name__=="__main__":

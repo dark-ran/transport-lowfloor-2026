@@ -59,6 +59,10 @@ jobs:
             medical/results/v3_*.csv
             medical/results/v3_*.json
             medical/results/v3_*.md
+            medical/results/v4_*.csv
+            medical/results/v4_*.json
+            medical/results/v4_*.md
+            medical/results/validation_v4_receipt.json
           if-no-files-found: error
 
   publish_verified_results:
@@ -85,6 +89,8 @@ jobs:
           git add medical/results/route_case_brief.md medical/results/validation_v2_receipt.json
           git add medical/results/v3_*.csv medical/results/v3_*.json medical/results/v3_*.md
           git add medical/results/validation_v3_receipt.json
+          git add medical/results/v4_*.csv medical/results/v4_*.json medical/results/v4_*.md
+          git add medical/results/validation_v4_receipt.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
