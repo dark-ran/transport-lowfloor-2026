@@ -26,6 +26,7 @@ STAGES = [
     "headway_proxy.py",
     "audit_headway_proxy.py",
     "feasibility_assumptions.py",
+    "benchmark_greedy_small.py",
     "route_marginal.py",
     "allocated_route_pilot.py",
     "route_case_brief.py"
