@@ -20,6 +20,8 @@ def study(origins, model, fractions=ASSUMED_ELIGIBLE_FRACTIONS):
     n = model["f"].fleet.to_numpy(int)
     l = model["f"].low.to_numpy(int)
     available = n - l
+    banned = set(json.loads((ROOT/"raw/exception_routes_2026.json").read_text(encoding="utf-8"))["routes"])
+    allowed = np.array([route not in banned for route in routes],dtype=bool)
     rows = []
     details = []
     for share in fractions:
@@ -34,7 +36,7 @@ def study(origins, model, fractions=ASSUMED_ELIGIBLE_FRACTIONS):
             "eligible_highfloor_fraction_assumed": share,
             "route_max_5": True,
             "spent": int(a.sum()), "unspent": 50-int(a.sum()),
-            "eligible_non_exception_route_count": int((route_cap>0).sum()),
+            "eligible_non_exception_route_count": int(((route_cap>0)&allowed).sum()),
             "allocated_route_count": int((a>0).sum()),
             "base_delta_index": measured["delta_index"],
             "changed_dongs": measured["changed_dongs"],
