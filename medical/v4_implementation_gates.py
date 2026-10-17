@@ -10,7 +10,7 @@ import pandas as pd
 ROOT=Path(__file__).resolve().parent
 
 
-def compile_gates(allocations,headways,directional,exception_names):
+def compile_gates(allocations,headways,directional,exception_names,expected_budget=50):
     chosen=allocations[allocations.policy=="screened_cap_5"].copy()
     chosen["route"]=chosen.route.astype(str)
     assert chosen.added.sum()==50 and chosen.route.is_unique
