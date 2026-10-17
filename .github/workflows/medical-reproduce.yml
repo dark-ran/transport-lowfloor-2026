@@ -1,0 +1,45 @@
+name: Medical offline reproducibility
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'medical/**'
+      - 'README.md'
+      - '.github/workflows/medical-reproduce.yml'
+
+concurrency:
+  group: medical-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install Korean chart fonts
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-nanum
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Execute complete medical analysis and independent audits
+        run: python medical/reproduce_all.py
+      - name: Publish reproducibility outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: medical-validation-outputs
+          path: |
+            medical/results/cap_*.csv
+            medical/results/cap_*.json
+            medical/results/cap_*.png
+            medical/results/cap5_*.csv
+            medical/results/cap5_*.json
+          if-no-files-found: warn

@@ -1,3 +1,4 @@
+from font_compat import korean_font
 """Static medical-route opportunity screening. Not a timetable or patient travel model."""
 from pathlib import Path
 import json,hashlib
@@ -106,7 +107,7 @@ def main():
  stable=z.merge(rr,on='code');stable=stable[(stable.min_stops>0)&stable.centroid_inside].copy();stable['robust_gap_weight']=stable.seniors*(1-stable.max_score);stable.sort_values('robust_gap_weight',ascending=False).to_csv(out/'robust_priority_dongs.csv',index=False,encoding='utf-8-sig')
  summary={'origins':len(o),'seniors':int(o.seniors.sum()),'fleet_families':len(f),'main_families':len(m['f']),'main_fleet_vehicles':int(m['f'].fleet.sum()),'general_hospitals':len(h),'all_active_coordinate_hospitals':len(allh),'coordinate_missing_active_hospitals':8,'centroids_outside':int((~o.centroid_inside).sum()),'population_weighted_connection_share':float(con@o.seniors/o.seniors.sum()),'types':z.groupby('type').agg(dongs=('code','count'),representative_seniors=('seniors','sum')).reset_index().to_dict('records'),'policy':res.to_dict('records'),'silhouette':sil,'selected_k':best,'greedy_steps':steps,'source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'data').glob('*')},'interpretation':'Static shared-route supply opportunity; not actual direct travel, arrival probability, patient count, time savings or causal impact.'}
  (out/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
- plt.rcParams.update({'font.family':'Malgun Gothic','axes.unicode_minus':False,'font.size':12})
+ plt.rcParams.update({'font.family':korean_font(),'axes.unicode_minus':False,'font.size':12})
  geo=json.loads((ROOT/'data'/'seoul_dongs.geojson').read_text(encoding='utf-8'));lookup=z.set_index('code');patches=[];vals=[]
  for feat in geo['features']:
   code=feat['properties']['adm_cd2'];geom=shape(feat['geometry']);polys=[geom] if geom.geom_type=='Polygon' else list(geom.geoms)
