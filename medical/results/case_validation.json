@@ -1,0 +1,311 @@
+{
+  "source_date": "2026-10-17",
+  "source_route_count": 69,
+  "origin_points": "2025 administrative dong projected centroid; not resident home",
+  "hospital_selection": "nearest general hospital in the original screening",
+  "endpoint_radius_m": 500,
+  "transfer_rule": "same stationId platform, no inferred walking transfer",
+  "path_rule": "strictly increasing stationOrd; no interior turnPlaceStationYn=Y; no list wrapping",
+  "selection_rule": "prefer direct if present, then shortest sum of captured guganLen; deterministic; not fastest or globally shortest",
+  "headway_interpretation": "published nominal route-level weekday/weekend interval, not observed stop wait or lowfloor headway; file freshness is not guaranteed by download date",
+  "fleet_interpretation": "2025-04-25 fleet ratio reference only; NOT 2026 current route lowfloor share; ambiguous branch ratios left null",
+  "limits": [
+    "69 preselected routes only; no conclusion that other routes or rail alternatives do not exist",
+    "Euclidean endpoint distances are not verified pedestrian paths",
+    "Direction/turning check does not validate timetable continuity, service disruptions, accessibility or boarding",
+    "No actual field travel, passenger timing, wheelchair boarding or return appointment schedule verification",
+    "2026 nominal route snapshot is a case cross-check, not a replacement for the 2025 aggregate model"
+  ],
+  "cases": [
+    {
+      "dong": "오류2동",
+      "dong_code": 1153078000,
+      "hospital": "구로성심병원",
+      "direction": "병원행",
+      "captured_direct_examples": 8,
+      "captured_transfer_examples": 207,
+      "selected": {
+        "transfers": 0,
+        "origin_straight_m": 394.95825594644475,
+        "destination_straight_m": 63.19498464776963,
+        "legs": [
+          {
+            "route": "6640B",
+            "route_id": "100100602",
+            "board": "오류2동주민센터",
+            "board_ars": "17203",
+            "board_seq": 16,
+            "alight": "동양미래대학.구로성심병원",
+            "alight_ars": "17008",
+            "alight_seq": 23,
+            "stop_intervals": 7,
+            "route_length_m": 3338,
+            "weekday_headway_minutes": "14",
+            "saturday_headway_minutes": "16",
+            "holiday_headway_minutes": "15",
+            "first_departure_at_origin": "0430",
+            "last_departure_at_origin": "2310",
+            "fleet_ratio_2025": null
+          }
+        ]
+      },
+      "alternative_direct_routes": [
+        "660",
+        "6640B"
+      ]
+    },
+    {
+      "dong": "오류2동",
+      "dong_code": 1153078000,
+      "hospital": "구로성심병원",
+      "direction": "귀가행",
+      "captured_direct_examples": 8,
+      "captured_transfer_examples": 177,
+      "selected": {
+        "transfers": 0,
+        "origin_straight_m": 143.00977533219552,
+        "destination_straight_m": 418.21800296681636,
+        "legs": [
+          {
+            "route": "6640A",
+            "route_id": "100100601",
+            "board": "동양미래대학.구로성심병원",
+            "board_ars": "17007",
+            "board_seq": 26,
+            "alight": "오류2동주민센터",
+            "alight_ars": "17204",
+            "alight_seq": 32,
+            "stop_intervals": 6,
+            "route_length_m": 3400,
+            "weekday_headway_minutes": "14",
+            "saturday_headway_minutes": "18",
+            "holiday_headway_minutes": "18",
+            "first_departure_at_origin": "0430",
+            "last_departure_at_origin": "2310",
+            "fleet_ratio_2025": null
+          }
+        ]
+      },
+      "alternative_direct_routes": [
+        "6640A"
+      ]
+    },
+    {
+      "dong": "오금동",
+      "dong_code": 1171057000,
+      "hospital": "경찰병원",
+      "direction": "병원행",
+      "captured_direct_examples": 0,
+      "captured_transfer_examples": 56,
+      "selected": {
+        "transfers": 1,
+        "origin_straight_m": 423.68959232051236,
+        "destination_straight_m": 421.6506589616701,
+        "transfer_platform": "123000253",
+        "legs": [
+          {
+            "route": "3317",
+            "route_id": "100100478",
+            "board": "송파도서관",
+            "board_ars": "24266",
+            "board_seq": 9,
+            "alight": "가락동미륭아파트",
+            "alight_ars": "24344",
+            "alight_seq": 12,
+            "stop_intervals": 3,
+            "route_length_m": 1168,
+            "weekday_headway_minutes": "10",
+            "saturday_headway_minutes": "10",
+            "holiday_headway_minutes": "10",
+            "first_departure_at_origin": "0430",
+            "last_departure_at_origin": "2330",
+            "fleet_ratio_2025": 0.09090909090909091
+          },
+          {
+            "route": "301",
+            "route_id": "100100051",
+            "board": "가락동미륭아파트",
+            "board_ars": "24344",
+            "board_seq": 12,
+            "alight": "건너말공원입구",
+            "alight_ars": "24343",
+            "alight_seq": 13,
+            "stop_intervals": 1,
+            "route_length_m": 376,
+            "weekday_headway_minutes": "7",
+            "saturday_headway_minutes": "9",
+            "holiday_headway_minutes": "9",
+            "first_departure_at_origin": "0400",
+            "last_departure_at_origin": "2230",
+            "fleet_ratio_2025": 0.6428571428571429
+          }
+        ]
+      },
+      "alternative_direct_routes": []
+    },
+    {
+      "dong": "오금동",
+      "dong_code": 1171057000,
+      "hospital": "경찰병원",
+      "direction": "귀가행",
+      "captured_direct_examples": 0,
+      "captured_transfer_examples": 61,
+      "selected": {
+        "transfers": 1,
+        "origin_straight_m": 415.553590989675,
+        "destination_straight_m": 493.72480312997334,
+        "transfer_platform": "123000239",
+        "legs": [
+          {
+            "route": "301",
+            "route_id": "100100051",
+            "board": "건너말공원입구",
+            "board_ars": "24366",
+            "board_seq": 88,
+            "alight": "가락현대1차아파트정문",
+            "alight_ars": "24329",
+            "alight_seq": 89,
+            "stop_intervals": 1,
+            "route_length_m": 451,
+            "weekday_headway_minutes": "7",
+            "saturday_headway_minutes": "9",
+            "holiday_headway_minutes": "9",
+            "first_departure_at_origin": "0400",
+            "last_departure_at_origin": "2230",
+            "fleet_ratio_2025": 0.6428571428571429
+          },
+          {
+            "route": "3317",
+            "route_id": "100100478",
+            "board": "가락현대1차아파트정문",
+            "board_ars": "24329",
+            "board_seq": 30,
+            "alight": "우창아파트",
+            "alight_ars": "24267",
+            "alight_seq": 33,
+            "stop_intervals": 3,
+            "route_length_m": 1017,
+            "weekday_headway_minutes": "10",
+            "saturday_headway_minutes": "10",
+            "holiday_headway_minutes": "10",
+            "first_departure_at_origin": "0430",
+            "last_departure_at_origin": "2330",
+            "fleet_ratio_2025": 0.09090909090909091
+          }
+        ]
+      },
+      "alternative_direct_routes": []
+    },
+    {
+      "dong": "내곡동",
+      "dong_code": 1165066000,
+      "hospital": "삼성서울병원",
+      "direction": "병원행",
+      "captured_direct_examples": 0,
+      "captured_transfer_examples": 11,
+      "selected": {
+        "transfers": 1,
+        "origin_straight_m": 49.93761142718295,
+        "destination_straight_m": 267.4513548937275,
+        "transfer_platform": "122000675",
+        "legs": [
+          {
+            "route": "452",
+            "route_id": "113000002",
+            "board": "샘마을.서울특별시어린이병원",
+            "board_ars": "22042",
+            "board_seq": 88,
+            "alight": "은곡마을.강남신동아파밀리에",
+            "alight_ars": "23537",
+            "alight_seq": 94,
+            "stop_intervals": 6,
+            "route_length_m": 3062,
+            "weekday_headway_minutes": "12",
+            "saturday_headway_minutes": "12",
+            "holiday_headway_minutes": "13",
+            "first_departure_at_origin": "0400",
+            "last_departure_at_origin": "2250",
+            "fleet_ratio_2025": 0.5
+          },
+          {
+            "route": "강남06",
+            "route_id": "122900005",
+            "board": "은곡마을.강남신동아파밀리에",
+            "board_ars": "23537",
+            "board_seq": 4,
+            "alight": "일원주유소.삼성서울병원후문",
+            "alight_ars": "23994",
+            "alight_seq": 15,
+            "stop_intervals": 11,
+            "route_length_m": 5099,
+            "weekday_headway_minutes": "9",
+            "saturday_headway_minutes": "10",
+            "holiday_headway_minutes": "11",
+            "first_departure_at_origin": "0530",
+            "last_departure_at_origin": "2310",
+            "fleet_ratio_2025": null
+          }
+        ]
+      },
+      "alternative_direct_routes": []
+    },
+    {
+      "dong": "내곡동",
+      "dong_code": 1165066000,
+      "hospital": "삼성서울병원",
+      "direction": "귀가행",
+      "captured_direct_examples": 0,
+      "captured_transfer_examples": 14,
+      "selected": {
+        "transfers": 1,
+        "origin_straight_m": 218.24473784461233,
+        "destination_straight_m": 79.64634489621044,
+        "transfer_platform": "122000305",
+        "legs": [
+          {
+            "route": "강남06",
+            "route_id": "122900005",
+            "board": "삼성서울병원후문",
+            "board_ars": "23389",
+            "board_seq": 33,
+            "alight": "은곡마을.LH이편한세상",
+            "alight_ars": "23412",
+            "alight_seq": 42,
+            "stop_intervals": 9,
+            "route_length_m": 4613,
+            "weekday_headway_minutes": "9",
+            "saturday_headway_minutes": "10",
+            "holiday_headway_minutes": "11",
+            "first_departure_at_origin": "0530",
+            "last_departure_at_origin": "2310",
+            "fleet_ratio_2025": null
+          },
+          {
+            "route": "452",
+            "route_id": "113000002",
+            "board": "은곡마을.LH이편한세상",
+            "board_ars": "23412",
+            "board_seq": 35,
+            "alight": "샘마을.서울특별시어린이병원",
+            "alight_ars": "22041",
+            "alight_seq": 40,
+            "stop_intervals": 5,
+            "route_length_m": 3004,
+            "weekday_headway_minutes": "12",
+            "saturday_headway_minutes": "12",
+            "holiday_headway_minutes": "13",
+            "first_departure_at_origin": "0400",
+            "last_departure_at_origin": "2250",
+            "fleet_ratio_2025": 0.5
+          }
+        ]
+      },
+      "alternative_direct_routes": []
+    }
+  ],
+  "source_hashes": {
+    "raw\\current_case_stops.json": "563dc4337d7ef0081c33f63b623389f9fd2a627c8f8cf5f5eb807d171b818091",
+    "raw\\노선정보_20261017.csv": "ff616957cb3e16443bad2b84f5be4980cfa615a5323eb4649c26f3c30e2f9074",
+    "raw\\topis_case_metadata.json": "46358445dae0a4f6a63e39200fec8f729900a779cd203778132e6ac1fb8e5cc2"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "acquired_date_kst": "2026-10-17",
+  "purpose": "independent desk cross-check of three screening candidates",
+  "route_metadata": {
+    "page": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewfile.do?data_id=53",
+    "download": "https://t-data.seoul.go.kr/dataprovide/download.do?id=10246",
+    "provider": "서울특별시 BIS",
+    "rows": 1751,
+    "license": "저작자표시 BY",
+    "raw_file": "노선정보_20261017.csv"
+  },
+  "route_stops": {
+    "page": "https://topis.seoul.go.kr/map/openBusMap.do",
+    "endpoint": "https://topis.seoul.go.kr/map/busMap/selectBusLineStnList.do",
+    "method": "POST",
+    "parameter": "routId",
+    "routes": 69,
+    "raw_file": "current_case_stops.json"
+  },
+  "headway_crosscheck": {
+    "endpoint": "https://topis.seoul.go.kr/map/busMap/selectBusList.do",
+    "method": "POST",
+    "parameters": {
+      "routName": "each of 6640A,6640B,660,3317,301,452,강남06",
+      "pageIndex": 1,
+      "pageSize": 100,
+      "recordPerPage": 100
+    },
+    "raw_file": "topis_case_metadata.json"
+  },
+  "fields_used": [
+    "stationOrd",
+    "stationId",
+    "arsId",
+    "stnName",
+    "posX",
+    "posY",
+    "turnPlaceStationYn",
+    "guganLen",
+    "norTerms",
+    "satTerms",
+    "holTerms",
+    "timeFirst",
+    "timeLast"
+  ],
+  "not_performed": [
+    "passenger/field survey",
+    "actual bus boarding",
+    "observed waiting time",
+    "pedestrian/step-free route verification",
+    "clinic schedule feasibility"
+  ]
+}
