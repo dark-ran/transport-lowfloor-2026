@@ -58,7 +58,7 @@ class V4EvidenceTests(unittest.TestCase):
                          "nominal_weekday_headway_min":[15]})
         directional=pd.DataFrame({"route":[route],"snapshot_route_available":[True],
                                   "coverage":["bidirectional"]})
-        result=compile_gates(allocations,hw,directional,set())
+        result=compile_gates(allocations,hw,directional,set(),expected_budget=5)
         self.assertTrue(bool(result.iloc[0].some_pairs_bidirectional_order_valid))
         self.assertFalse(bool(result.iloc[0].actual_unit_cost_or_maintenance_cost_verified))
         self.assertFalse(bool(result.iloc[0].bus_vehicle_level_lowfloor_departures_verified))
