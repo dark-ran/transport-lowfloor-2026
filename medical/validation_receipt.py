@@ -18,7 +18,10 @@ REQUIRED=[
  "feasibility_assumption_allocations.csv","feasibility_assumption_metadata.json",
  "toy_greedy_exact.csv","toy_greedy_exact_summary.json",
  "route_case_brief.md","cap5_route_pilot_candidates.csv",
- "cap5_route_marginal_pairs.csv"
+ "cap5_route_marginal_pairs.csv",
+ "v3_denominator_multiroute.csv","v3_pair_classification.csv",
+ "v3_denominator_metadata.json","v3_denominator_audit.json",
+ "v3_policy_brief.md"
 ]
 
 
@@ -32,6 +35,8 @@ def main():
         assert file.is_file() and file.stat().st_size>0, str(file)
     eq=json.loads((RESULTS/"cap_equity_audit.json").read_text(encoding="utf-8"))
     assert eq["passed"] is True
+    v3=json.loads((RESULTS/"v3_denominator_audit.json").read_text(encoding="utf-8"))
+    assert v3["passed"] is True
     cap=pd.read_csv(RESULTS/"cap_equity_summary.csv")
     head=pd.read_csv(RESULTS/"headway_proxy_sensitivity.csv")
     feasibility=pd.read_csv(RESULTS/"feasibility_assumption_stress.csv")
@@ -58,9 +63,9 @@ def main():
           "No observed wheelchair trip, real walking route or financial costing"
       ]
     }
-    (RESULTS/"validation_v2_receipt.json").write_text(json.dumps(
+    (RESULTS/"validation_v3_receipt.json").write_text(json.dumps(
         receipt,ensure_ascii=False,indent=2),encoding="utf-8")
-    print("V2 RECEIPT PASSED; files:",len(files),"raw sources:",len(src))
+    print("V3 RECEIPT PASSED; files:",len(files),"raw sources:",len(src))
 
 
 if __name__=="__main__":
