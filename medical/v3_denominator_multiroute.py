@@ -51,12 +51,15 @@ def fixed_allocations(model, folder):
     n = model["f"].fleet.to_numpy(int)
     low = model["f"].low.to_numpy(int)
     data = [
-        pd.read_csv(folder / "cap_allocations.csv", dtype={"route": str}),
-        pd.read_csv(folder / "screened_allocations.csv", dtype={"route": str})
+        (pd.read_csv(folder / "cap_allocations.csv", dtype={"route": str}), None),
+        (pd.read_csv(folder / "screened_allocations.csv", dtype={"route": str}),
+         {"예외제외 비례", "예외제외·5조건 강건5대"})
     ]
     plans = {}
-    for frame in data:
+    for frame, allowed in data:
         for policy, block in frame.groupby("policy"):
+            if allowed is not None and policy not in allowed:
+                continue
             if policy in plans:
                 continue
             assert not block.route.duplicated().any()
