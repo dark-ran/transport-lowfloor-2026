@@ -1,0 +1,11 @@
+{
+  "raw_hashes_pass": true,
+  "population_total_pass": true,
+  "policy_capacity_and_scope_pass": true,
+  "stop_coordinate_consistency_pass": true,
+  "general_hospitals": 59,
+  "matched_dongs": 426,
+  "main_families": 294,
+  "source_fleet_total": 6825,
+  "source_low_total": 5292
+}

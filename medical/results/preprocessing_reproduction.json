@@ -1,0 +1,10 @@
+{
+  "same_hashes": true,
+  "data_hashes": {
+    "fleets.csv": "be839cb51404261c04968281aee16b6670cb0385405cde9c924f1e17d2376c5b",
+    "hospitals.csv": "c9b9673222195ead46f1799408f8e79dec980a2ba7de6dfe12d24f89e16effcf",
+    "origins.csv": "e211a46b6791f7a4d585461be86f4ef7aeb7df7312cea66ef1be47728c5fcfa4",
+    "route_stops.csv": "014d8a42bbddf9f1c45ede4d8a7b0d40b90593c626fea793fcba13951d6a8b10",
+    "seoul_dongs.geojson": "9597cd1b341485a6d2e59a154c6827af21faa96a8ab52fd118dd844345dcded8"
+  }
+}

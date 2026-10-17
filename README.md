@@ -1,3 +1,9 @@
+# 현재 제출 분석: 고령인구의 종합병원 연결과 저상버스 공급기회
+
+최종 제출 주제의 재현 코드·출처·검증은 [medical/README.md](medical/README.md)에 있습니다. `python medical/prepare.py`, `python medical/analyze_medical.py`로 실행합니다.
+
+아래는 보존한 초기 보유율 분석입니다.
+
 # 서울시 저상버스 공급 격차와 단계적 교체 배분
 
 2026 AI와 함께하는 교통문제 해결을 위한 데이터 분석 공모전 분석 코드.

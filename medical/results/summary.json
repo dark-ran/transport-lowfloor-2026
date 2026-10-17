@@ -1,0 +1,167 @@
+{
+  "origins": 426,
+  "seniors": 1873638,
+  "fleet_families": 335,
+  "main_families": 294,
+  "main_fleet_vehicles": 6361,
+  "general_hospitals": 59,
+  "all_active_coordinate_hospitals": 545,
+  "coordinate_missing_active_hospitals": 8,
+  "centroids_outside": 5,
+  "population_weighted_connection_share": 0.7393336742031633,
+  "types": [
+    {
+      "type": "공유노선 연결 없음",
+      "dongs": 15,
+      "representative_seniors": 56294
+    },
+    {
+      "type": "연결·공급 확보",
+      "dongs": 192,
+      "representative_seniors": 826846
+    },
+    {
+      "type": "연결노선 저상비율 낮음",
+      "dongs": 29,
+      "representative_seniors": 134555
+    },
+    {
+      "type": "인근 정류소 없음",
+      "dongs": 22,
+      "representative_seniors": 110822
+    },
+    {
+      "type": "일부 병원 연결 없음",
+      "dongs": 168,
+      "representative_seniors": 745121
+    }
+  ],
+  "policy": [
+    {
+      "policy": "현행",
+      "budget_limit": 50,
+      "spent": 0,
+      "index": 0.6676262817135347,
+      "delta_index": 0.0,
+      "changed_dongs": 0,
+      "changed_dong_seniors": 0,
+      "zero_index_dongs": 39
+    },
+    {
+      "policy": "잔여대수 비례",
+      "budget_limit": 50,
+      "spent": 50,
+      "index": 0.6695346659195661,
+      "delta_index": 0.0019083842060315635,
+      "changed_dongs": 62,
+      "changed_dong_seniors": 249164,
+      "zero_index_dongs": 38
+    },
+    {
+      "policy": "의료연결 우선",
+      "budget_limit": 50,
+      "spent": 50,
+      "index": 0.6862110386658121,
+      "delta_index": 0.01858475695227752,
+      "changed_dongs": 60,
+      "changed_dong_seniors": 292758,
+      "zero_index_dongs": 38
+    }
+  ],
+  "silhouette": {
+    "2": 0.48273575733516094,
+    "3": 0.3926837411162044,
+    "4": 0.41482318434875315,
+    "5": 0.42350420300811503,
+    "6": 0.43022366502065906
+  },
+  "selected_k": 2,
+  "greedy_steps": [
+    {
+      "route_index": 166,
+      "added": 3,
+      "gain": 0.0018366731035354702,
+      "spent_total": 3
+    },
+    {
+      "route_index": 215,
+      "added": 5,
+      "gain": 0.0024097500280199392,
+      "spent_total": 8
+    },
+    {
+      "route_index": 126,
+      "added": 5,
+      "gain": 0.002378523080803323,
+      "spent_total": 13
+    },
+    {
+      "route_index": 259,
+      "added": 1,
+      "gain": 0.0004401165260413416,
+      "spent_total": 14
+    },
+    {
+      "route_index": 97,
+      "added": 4,
+      "gain": 0.0013983275296293074,
+      "spent_total": 18
+    },
+    {
+      "route_index": 249,
+      "added": 1,
+      "gain": 0.000340640033512937,
+      "spent_total": 19
+    },
+    {
+      "route_index": 249,
+      "added": 3,
+      "gain": 0.0010219201005388094,
+      "spent_total": 22
+    },
+    {
+      "route_index": 249,
+      "added": 1,
+      "gain": 0.00034064003351293615,
+      "spent_total": 23
+    },
+    {
+      "route_index": 293,
+      "added": 8,
+      "gain": 0.0026526409472236055,
+      "spent_total": 31
+    },
+    {
+      "route_index": 256,
+      "added": 9,
+      "gain": 0.002772423139048043,
+      "spent_total": 40
+    },
+    {
+      "route_index": 274,
+      "added": 4,
+      "gain": 0.0012285365877768508,
+      "spent_total": 44
+    },
+    {
+      "route_index": 177,
+      "added": 2,
+      "gain": 0.0006061229387748507,
+      "spent_total": 46
+    },
+    {
+      "route_index": 48,
+      "added": 4,
+      "gain": 0.001158442903860108,
+      "spent_total": 50
+    }
+  ],
+  "source_hashes": {
+    "data\\fleets.csv": "be839cb51404261c04968281aee16b6670cb0385405cde9c924f1e17d2376c5b",
+    "data\\hospitals.csv": "c9b9673222195ead46f1799408f8e79dec980a2ba7de6dfe12d24f89e16effcf",
+    "data\\origins.csv": "e211a46b6791f7a4d585461be86f4ef7aeb7df7312cea66ef1be47728c5fcfa4",
+    "data\\route_stops.csv": "014d8a42bbddf9f1c45ede4d8a7b0d40b90593c626fea793fcba13951d6a8b10",
+    "data\\seoul_dongs.geojson": "9597cd1b341485a6d2e59a154c6827af21faa96a8ab52fd118dd844345dcded8"
+  },
+  "interpretation": "Static shared-route supply opportunity; not actual direct travel, arrival probability, patient count, time savings or causal impact."
+}

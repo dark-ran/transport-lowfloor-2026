@@ -1,0 +1,3 @@
+medical/raw/** -text
+medical/data/** -text
+medical/results/** -text
