@@ -1,0 +1,56 @@
+name: Manual real bus snapshot
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check real API credentials
+        env:
+          SEOUL_BUS_API_KEY: ${{ secrets.SEOUL_BUS_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os,sys
+          if not os.environ.get('SEOUL_BUS_API_KEY','').strip():
+              sys.exit('No API calls made. Register repository Actions Secret SEOUL_BUS_API_KEY first.')
+          PY
+      - name: Install collector dependency
+        run: python -m pip install pandas==3.0.1
+      - name: Generate ephemeral pseudonym salt
+        run: |
+          python - <<'PY'
+          import os,secrets
+          salt=secrets.token_hex(32)
+          print('::add-mask::'+salt)
+          with open(os.environ['GITHUB_ENV'],'a') as f:
+              f.write('V4_VEHICLE_SALT='+salt+'\n')
+          PY
+      - name: Capture six explicit route-direction snapshots
+        env:
+          SEOUL_BUS_API_KEY: ${{ secrets.SEOUL_BUS_API_KEY }}
+        run: |
+          python medical/v4_vehicle_snapshot.py --capture --output "$RUNNER_TEMP/vehicle_observations.jsonl" > "$RUNNER_TEMP/capture_receipt.json"
+          python medical/v4_capture_summary.py --receipt "$RUNNER_TEMP/capture_receipt.json" --private-jsonl "$RUNNER_TEMP/vehicle_observations.jsonl" --output "$RUNNER_TEMP/public/vehicle_capture_summary.json" --commit "$GITHUB_SHA"
+      - name: Publish aggregate receipt only
+        uses: actions/upload-artifact@v4
+        with:
+          name: bus-vehicle-aggregate-${{ github.run_id }}
+          path: ${{ runner.temp }}/public/vehicle_capture_summary.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Fail visibly when all provider requests failed
+        run: |
+          python - <<'PY'
+          import json,os,sys
+          from pathlib import Path
+          r=json.loads((Path(os.environ['RUNNER_TEMP'])/'public/vehicle_capture_summary.json').read_text())
+          if r['successful_requests']==0:
+              sys.exit('All API requests failed; see aggregate receipt. No real service claim is possible.')
+          PY

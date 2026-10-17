@@ -98,20 +98,24 @@ def normalize_xml(payload,request,observed_at,salt):
 def collect(requests,api_key,salt,output):
     if not api_key or not salt or len(salt)<16:
         raise ValueError("API key and a local random V4_VEHICLE_SALT of at least 16 chars are required")
-    if output.is_relative_to(ROOT):
-        raise ValueError("Use a private output path OUTSIDE the git medical folder")
+    output=output.resolve()
+    if output.is_relative_to(ROOT.parent):
+        raise ValueError("Use a private output path OUTSIDE the entire git repository")
     output.parent.mkdir(parents=True,exist_ok=True)
     records=[]
     failures=[]
     for request in requests:
         params=urllib.parse.urlencode({
-            "serviceKey":api_key,"busRouteId":request["route_id"],
+            "serviceKey":urllib.parse.unquote(api_key.strip()),"busRouteId":request["route_id"],
             "startOrd":request["startOrd"],"endOrd":request["endOrd"]})
         timestamp=datetime.now(timezone.utc).isoformat()
         try:
             # HTTPS only to avoid disclosing the service key through cleartext.
             with urllib.request.urlopen(API+"?"+params,timeout=15) as response:
                 payload=response.read(2_000_000)
+            header=ET.fromstring(payload).find(".//msgHeader")
+            if header is None or header.findtext("headerCd") not in ("0","00"):
+                raise ValueError("Successful provider header required")
             records.extend(normalize_xml(payload,request,timestamp,salt))
         except (OSError,ValueError,ET.ParseError) as exc:
             failures.append({"route":request["route"],"direction":request["direction"],
