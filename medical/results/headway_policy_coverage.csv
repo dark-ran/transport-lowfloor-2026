@@ -1,0 +1,195 @@
+﻿policy,route,replacements,headway_matched,nominal_headway_min
+의료연결 우선,343,4,True,15.0
+의료연결 우선,662,4,True,12.0
+의료연결 우선,1124,5,True,14.0
+의료연결 우선,3212,3,True,14.0
+의료연결 우선,3319,2,True,17.0
+의료연결 우선,5611,5,True,17.0
+의료연결 우선,6629,5,True,11.0
+의료연결 우선,6642,9,True,12.0
+의료연결 우선,6648,1,True,13.0
+의료연결 우선,7211,4,True,9.0
+의료연결 우선,2312,8,True,16.0
+screened_cap_1,147,1,True,9.0
+screened_cap_1,341,1,True,12.0
+screened_cap_1,342,1,True,11.0
+screened_cap_1,343,1,True,15.0
+screened_cap_1,361,1,True,12.0
+screened_cap_1,421,1,True,9.0
+screened_cap_1,603,1,True,10.0
+screened_cap_1,662,1,True,12.0
+screened_cap_1,674,1,True,13.0
+screened_cap_1,1112,1,True,12.0
+screened_cap_1,1124,1,True,14.0
+screened_cap_1,1132,1,True,8.0
+screened_cap_1,1135,1,True,10.0
+screened_cap_1,1213,1,True,12.0
+screened_cap_1,1218,1,True,11.0
+screened_cap_1,1222,1,True,10.0
+screened_cap_1,2014,1,True,12.0
+screened_cap_1,2016,1,True,11.0
+screened_cap_1,2212,1,True,14.0
+screened_cap_1,2224,1,True,13.0
+screened_cap_1,2233,1,True,15.0
+screened_cap_1,2236,1,True,13.0
+screened_cap_1,3212,1,True,14.0
+screened_cap_1,3319,1,True,17.0
+screened_cap_1,3322,1,True,11.0
+screened_cap_1,3323,1,True,15.0
+screened_cap_1,3411,1,True,11.0
+screened_cap_1,3412,1,True,14.0
+screened_cap_1,3413,1,True,9.0
+screened_cap_1,3426,1,True,10.0
+screened_cap_1,4211,1,True,13.0
+screened_cap_1,4435,1,True,15.0
+screened_cap_1,5413,1,True,7.0
+screened_cap_1,5611,1,True,17.0
+screened_cap_1,5626,1,True,12.0
+screened_cap_1,5634,1,True,13.0
+screened_cap_1,6411,1,True,12.0
+screened_cap_1,6512,1,True,10.0
+screened_cap_1,6514,1,True,13.0
+screened_cap_1,6515,1,True,10.0
+screened_cap_1,6629,1,True,11.0
+screened_cap_1,6632,1,True,11.0
+screened_cap_1,6642,1,True,12.0
+screened_cap_1,6648,1,True,13.0
+screened_cap_1,7017,1,True,10.0
+screened_cap_1,7018,1,True,10.0
+screened_cap_1,7211,1,True,9.0
+screened_cap_1,7611,1,True,12.0
+screened_cap_1,7715,1,True,10.0
+screened_cap_1,2312,1,True,16.0
+screened_cap_3,343,3,True,15.0
+screened_cap_3,662,3,True,12.0
+screened_cap_3,674,3,True,13.0
+screened_cap_3,1124,3,True,14.0
+screened_cap_3,1135,2,True,10.0
+screened_cap_3,1213,2,True,12.0
+screened_cap_3,1222,1,True,10.0
+screened_cap_3,2014,1,True,12.0
+screened_cap_3,3212,3,True,14.0
+screened_cap_3,3319,2,True,17.0
+screened_cap_3,3323,2,True,15.0
+screened_cap_3,3413,3,True,9.0
+screened_cap_3,4211,2,True,13.0
+screened_cap_3,5413,1,True,7.0
+screened_cap_3,5611,3,True,17.0
+screened_cap_3,5634,3,True,13.0
+screened_cap_3,6411,1,True,12.0
+screened_cap_3,6515,2,True,10.0
+screened_cap_3,6629,3,True,11.0
+screened_cap_3,6648,1,True,13.0
+screened_cap_3,7211,3,True,9.0
+screened_cap_3,2312,3,True,16.0
+screened_cap_5,343,5,True,15.0
+screened_cap_5,662,4,True,12.0
+screened_cap_5,1124,5,True,14.0
+screened_cap_5,1213,2,True,12.0
+screened_cap_5,1222,1,True,10.0
+screened_cap_5,3212,3,True,14.0
+screened_cap_5,3319,2,True,17.0
+screened_cap_5,3323,2,True,15.0
+screened_cap_5,3413,5,True,9.0
+screened_cap_5,5413,1,True,7.0
+screened_cap_5,5611,5,True,17.0
+screened_cap_5,6620,5,True,15.0
+screened_cap_5,6629,5,True,11.0
+screened_cap_5,6648,1,True,13.0
+screened_cap_5,7211,4,True,9.0
+screened_cap_7,343,6,True,15.0
+screened_cap_7,662,4,True,12.0
+screened_cap_7,1124,5,True,14.0
+screened_cap_7,1213,1,True,12.0
+screened_cap_7,3212,3,True,14.0
+screened_cap_7,3319,2,True,17.0
+screened_cap_7,5611,5,True,17.0
+screened_cap_7,6620,7,True,15.0
+screened_cap_7,6629,5,True,11.0
+screened_cap_7,6648,1,True,13.0
+screened_cap_7,7211,4,True,9.0
+screened_cap_7,2312,7,True,16.0
+screened_cap_10,343,4,True,15.0
+screened_cap_10,662,4,True,12.0
+screened_cap_10,1124,5,True,14.0
+screened_cap_10,3212,3,True,14.0
+screened_cap_10,3319,2,True,17.0
+screened_cap_10,5611,5,True,17.0
+screened_cap_10,6629,5,True,11.0
+screened_cap_10,6642,9,True,12.0
+screened_cap_10,6648,1,True,13.0
+screened_cap_10,7211,4,True,9.0
+screened_cap_10,2312,8,True,16.0
+screened_cap_none,343,4,True,15.0
+screened_cap_none,662,4,True,12.0
+screened_cap_none,1124,5,True,14.0
+screened_cap_none,3212,3,True,14.0
+screened_cap_none,3319,2,True,17.0
+screened_cap_none,5611,5,True,17.0
+screened_cap_none,6629,5,True,11.0
+screened_cap_none,6642,9,True,12.0
+screened_cap_none,6648,1,True,13.0
+screened_cap_none,7211,4,True,9.0
+screened_cap_none,2312,8,True,16.0
+예외제외 비례,101,1,True,8.0
+예외제외 비례,120,1,True,6.0
+예외제외 비례,130,1,True,8.0
+예외제외 비례,140,1,True,7.0
+예외제외 비례,143,1,True,6.0
+예외제외 비례,144,1,True,8.0
+예외제외 비례,145,1,True,8.0
+예외제외 비례,151,1,True,7.0
+예외제외 비례,152,1,True,7.0
+예외제외 비례,171,1,True,9.0
+예외제외 비례,241,1,True,10.0
+예외제외 비례,262,1,True,10.0
+예외제외 비례,272,1,True,6.0
+예외제외 비례,301,1,True,7.0
+예외제외 비례,340,1,True,7.0
+예외제외 비례,342,1,True,11.0
+예외제외 비례,360,1,True,6.0
+예외제외 비례,400,1,True,11.0
+예외제외 비례,401,1,True,11.0
+예외제외 비례,402,1,True,9.0
+예외제외 비례,421,1,True,9.0
+예외제외 비례,422,1,True,18.0
+예외제외 비례,452,1,True,12.0
+예외제외 비례,461,1,True,11.0
+예외제외 비례,505,1,True,11.0
+예외제외 비례,507,1,True,9.0
+예외제외 비례,605,1,True,10.0
+예외제외 비례,641,1,True,6.0
+예외제외 비례,652,1,True,10.0
+예외제외 비례,660,1,True,15.0
+예외제외 비례,721,1,True,9.0
+예외제외 비례,741,1,True,9.0
+예외제외 비례,1020,1,True,9.0
+예외제외 비례,1167,1,True,10.0
+예외제외 비례,1218,1,True,11.0
+예외제외 비례,2112,1,True,14.0
+예외제외 비례,2224,1,True,13.0
+예외제외 비례,2230,1,True,8.0
+예외제외 비례,2311,1,True,13.0
+예외제외 비례,3317,1,True,10.0
+예외제외 비례,4312,1,True,10.0
+예외제외 비례,4318,1,True,8.0
+예외제외 비례,5535,1,True,8.0
+예외제외 비례,5536,1,True,12.0
+예외제외 비례,5615,1,True,10.0
+예외제외 비례,6614,1,True,15.0
+예외제외 비례,6617,1,True,12.0
+예외제외 비례,6637,1,True,8.0
+예외제외 비례,6715,1,True,8.0
+예외제외 비례,7019,1,True,11.0
+예외제외·5조건 강건5대,662,4,True,12.0
+예외제외·5조건 강건5대,1124,5,True,14.0
+예외제외·5조건 강건5대,2224,5,True,13.0
+예외제외·5조건 강건5대,2236,5,True,13.0
+예외제외·5조건 강건5대,3212,3,True,14.0
+예외제외·5조건 강건5대,4319,5,True,10.0
+예외제외·5조건 강건5대,5611,5,True,17.0
+예외제외·5조건 강건5대,5634,2,True,13.0
+예외제외·5조건 강건5대,6511,5,True,20.0
+예외제외·5조건 강건5대,6620,5,True,15.0
+예외제외·5조건 강건5대,6642,5,True,12.0
+예외제외·5조건 강건5대,6648,1,True,13.0

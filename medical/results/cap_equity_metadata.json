@@ -1,0 +1,29 @@
+{
+  "budget_unit": "50 vehicle replacements, not monetary cost",
+  "screening": "All newly calculated cap policies exclude the same 25 official exception routes; original unscreened reference retained.",
+  "caps": [
+    "1",
+    "3",
+    "5",
+    "7",
+    "10",
+    "unrestricted"
+  ],
+  "base": "500 m nearest 3 general hospitals, static shared-route max fleet ratio",
+  "secondary_scenarios": [
+    "기본",
+    "반경300m",
+    "반경800m",
+    "최근접1곳",
+    "내부대표점",
+    "분기집계군 포함",
+    "시간대제약 미반영",
+    "일반병원 포함"
+  ],
+  "measurement": "Index gain and changed dongs are modeled, NOT verified boardings or hospital travel.",
+  "bottom_quintile": "Lowest 20% of 426 dongs by baseline index, not bottom 20% of individuals.",
+  "exposure": "Residents in a changed dong, NOT actual benefiting passengers.",
+  "gain_retention": "Relative to original medical-first allocation, at the 500 m base condition only.",
+  "algorithm": "Greedy route bundles under caps; neither global Pareto-optimality nor real-world feasibility certified.",
+  "pilot_status": "No timetable/low-floor vehicle schedule or patient trip outcomes verified by this module."
+}

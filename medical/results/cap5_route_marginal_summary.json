@@ -1,0 +1,8 @@
+{
+  "allocated_routes": 15,
+  "route_pair_counterfactual_records": 99,
+  "routes_with_positive_nonadditive_marginal": 15,
+  "logic": "Remove one selected route's hypothetical replacements, hold all other routes' allocations fixed, recalculate static max-ratio index.",
+  "caution": "Route marginals overlap and are not additive; no directed service, boarding, waiting, hospital visit or causal impact established.",
+  "pilot": "These specific dong-hospital-route pairs are the candidates for separate ordered-direction screening."
+}

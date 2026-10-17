@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "fixed_policy_reference_checks": 27,
+  "published_weekday_headways_only": true,
+  "unmatched_headways_not_imputed": true,
+  "observed_vehicle_level_departures": false,
+  "scope": "Independent formula recomputation from saved allocations and matched headways; not a real-world travel-time validation."
+}

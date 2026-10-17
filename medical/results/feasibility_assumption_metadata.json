@@ -1,0 +1,17 @@
+{
+  "purpose": "Operational eligibility uncertainty sensitivity, NOT implementation certification",
+  "fractions": [
+    0.25,
+    0.5,
+    1.0
+  ],
+  "formula": "floor((2025 licensed vehicles - 2025 low-floor vehicles) * researcher fraction) capped at 5 per route",
+  "additional_screen": "same official 25 exception routes excluded",
+  "budget_unit": "50 hypothetical vehicle replacements, not currency",
+  "reoptimized_for_each_eligibility_assumption": true,
+  "actual_vehicle_age_known": false,
+  "actual_vehicle_type_or_depot_known": false,
+  "actual_cost_or_charging_known": false,
+  "vehicle_level_decommission_or_replacement_schedule_known": false,
+  "limitation": "Fleet composition is 2025 data, operational or 2026 replacement feasibility is not known."
+}

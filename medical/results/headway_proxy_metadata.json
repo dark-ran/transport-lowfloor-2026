@@ -1,0 +1,29 @@
+{
+  "archived_raw_rows": 1751,
+  "archived_active_positive_interval_rows": 1186,
+  "matched_model_routes": 293,
+  "total_model_routes": 294,
+  "ambiguous_inactive_or_missing_model_routes": 1,
+  "matching_rule": "exact 2025 route name = one active 2026 BIS route ID with one unique 2..120-minute nominal interval; missing/conflicting/inactive excluded",
+  "source": "Seoul T-Data public BIS archived route-information CSV, downloaded 2026-10-17",
+  "source_url": "https://t-data.seoul.go.kr/dataprovide/trafficdataviewfile.do?data_id=53",
+  "fleet_reference": "2025-04-25; time-alignment not verified",
+  "formula": "max shared-route [2025 low-floor fleet ratio * min(1, reference_minutes / 2026 nominal published weekday headway)]",
+  "references": [
+    10,
+    15,
+    20
+  ],
+  "complete_network": false,
+  "unknown_headway": "excluded from proxy (not imputed), observable pair subset is identical for all compared policies",
+  "score_scope": "population-weighted normalized index on pairs with at least one matched shared route or within 500m straight-line walk flag",
+  "do_not_infer": [
+    "real low-floor departure interval",
+    "passenger wait or arrival probability",
+    "wheelchair boarding",
+    "direction or timetable continuity",
+    "causal travel benefit"
+  ],
+  "allocation_method": "all existing candidate allocations FIXED, not reoptimized",
+  "uncertainty": "2025 fleet and 2026 nominal headways mixed; reference 10/15/20 min is researcher sensitivity, not official standard"
+}

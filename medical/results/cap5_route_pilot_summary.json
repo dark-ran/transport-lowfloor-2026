@@ -1,0 +1,42 @@
+{
+  "allocation": "screened_cap_5, the static 50-replacement policy",
+  "matched_allocated_routes_in_cached_69_route_subset": [
+    "3319",
+    "3413",
+    "343",
+    "662"
+  ],
+  "allocated_route_count": 15,
+  "tested_route_dong_hospital_pairs": 30,
+  "pairs_with_at_least_one_ordered_direct_direction": 30,
+  "pairs_with_both_ordered_direct_directions": 26,
+  "examples_max_3": [
+    {
+      "dong": "위례동",
+      "hospital": "삼성서울병원",
+      "route": "343",
+      "both_directions": true,
+      "weekday_published_route_headway_min": "15"
+    },
+    {
+      "dong": "천호1동",
+      "hospital": "강동경희대학교병원",
+      "route": "3413",
+      "both_directions": true,
+      "weekday_published_route_headway_min": "9"
+    },
+    {
+      "dong": "천호1동",
+      "hospital": "성심의료재단강동성심병원",
+      "route": "3413",
+      "both_directions": true,
+      "weekday_published_route_headway_min": "9"
+    }
+  ],
+  "scope": "2026-10-17 archived TOPIS/BIS snapshot for three previously chosen districts; missing route/path is UNKNOWN, not unavailable.",
+  "distance": "500m straight-line endpoints; not accessible walking route",
+  "route_validation": "Increasing stop order, no internal turning point; no live timetable continuity test",
+  "headway": "Nominal whole-route service spacing; neither low-floor departure intervals nor measured wait",
+  "policy_effect": "Existing 2025 fleet ratio mechanically adjusted by hypothetical bus replacements; no real-world boardings, travel time or empirical effect verified",
+  "conclusion": "A route example, if found, establishes limited static plausibility only; NOT causal validation of replacement allocation."
+}

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "policies_audited": 7,
+  "policy_scenario_recomputations": 56,
+  "dong_rows_checked": 2982,
+  "no_live_timetable_validation": true,
+  "no_verified_real_passenger_benefit": true,
+  "scope": "Independent recomputation with the same static source data and index definition; not external or empirical verification."
+}
