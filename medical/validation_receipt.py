@@ -13,6 +13,7 @@ RESULTS=ROOT/"results"
 REQUIRED=[
  "cap_equity_summary.csv","cap_equity_audit.json","headway_matched_routes.csv",
  "headway_proxy_sensitivity.csv","headway_proxy_metadata.json",
+ "headway_proxy_audit.json",
  "headway_policy_coverage.csv","feasibility_assumption_stress.csv",
  "feasibility_assumption_allocations.csv","feasibility_assumption_metadata.json",
  "route_case_brief.md","cap5_route_pilot_candidates.csv",
