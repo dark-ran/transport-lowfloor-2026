@@ -16,6 +16,7 @@ REQUIRED=[
  "headway_proxy_audit.json",
  "headway_policy_coverage.csv","feasibility_assumption_stress.csv",
  "feasibility_assumption_allocations.csv","feasibility_assumption_metadata.json",
+ "toy_greedy_exact.csv","toy_greedy_exact_summary.json",
  "route_case_brief.md","cap5_route_pilot_candidates.csv",
  "cap5_route_marginal_pairs.csv"
 ]
