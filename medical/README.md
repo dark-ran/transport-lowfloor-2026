@@ -11,10 +11,11 @@
 - `cap_equity_summary.csv`: 단순히 지수가 증가한 동 수와 함께 **0.01·0.05 이상 증가한 동 수**, 개선 동의 하위 10%·중앙값, **기존 지수가 가장 낮은 하위 20% 동**에서의 변화, **전체 고령인구 가중 증가량 중 상위 10개 동의 비중**을 계산한다. 모든 수치는 모형 지수이며 실제 주민 수혜자 수가 아니다. 파레토 지배 여부는 *기본조건의 두 지표*에서만 비교한다.
 - `cap_fixed_scenarios.csv`: 각 교체 상한 정책별 **동일 배분표를 고정**하고 8개 설정에서 평가한다. 기본 설정의 유지율 94.56%를 모든 반경으로 확대해서는 안 된다.
 - `audit_policy_extension.py`: 저장된 배분표에서 동별·조건별 지수를 다시 계산해 CSV 수치, 동일 예산, 공식 예외 승인 노선 제외 및 상한 준수를 감사한다. 같은 입력자료에 의존하므로 독립 *현장 검증*은 아니다.
+- `route_marginal.py`: 분산형 5대 정책의 추천 노선 15개를 하나씩 교체 불가능으로 간주하되 다른 노선의 교체대수는 고정한 상태에서 **동–병원 쌍별 지수 감소**를 계산한다. 99개 정적 조합과 15개 노선별 기여 기록을 `results/cap5_route_marginal_pairs.csv` 및 `results/cap5_route_marginal_totals.csv`로 공개한다. 이 한 노선 제외 효과는 서로 더할 수 없고 실제 통행 편익의 인과 추정치가 아니다.
 - `allocated_route_pilot.py`: 분산형에서 교체 대상으로 추천한 15개 노선 중 **기존 69개 TOPIS/BIS 조회 스냅샷에 포함된 노선만** 동–가까운 종합병원과 연결해 정류장 순서·회차지 기준의 병원행/귀가행 직결 사례를 탐색한다. 별도의 모든 노선 수집이나 새로운 실제 시간표 조사는 하지 않았다. 결과가 없거나 귀가행을 찾지 못한 것은 결측·조사 범위 제한일 수 있으며 이동 불가능 판정이 아니다. 공시 노선 간격을 **저상버스 배차나 대기시간**으로 치환하지 않는다.
 - `plot_policy_extension.py`: 배분 집중도-개선 범위 교환관계와 의미 있는 개선 폭 기준을 함께 시각화한다.
 
-출력: `results/cap_equity_summary.csv`, `results/cap_fixed_scenarios.csv`, `results/cap_allocations.csv`, `results/cap_dong_changes.csv`, `results/cap_equity_audit.json`, `results/cap_equity_comparison.png`, `results/cap5_route_pilot_candidates.csv`, `results/cap5_route_pilot_summary.json`.
+출력: `results/cap_equity_summary.csv`, `results/cap_fixed_scenarios.csv`, `results/cap_allocations.csv`, `results/cap_dong_changes.csv`, `results/cap_equity_audit.json`, `results/cap_equity_comparison.png`, `results/cap5_route_marginal_pairs.csv`, `results/cap5_route_marginal_totals.csv`, `results/cap5_route_pilot_candidates.csv`, `results/cap5_route_pilot_summary.json`.
 
 **미해결 핵심 사항:** 기본 지수는 공유노선의 최댓값 기준이라 방향·대기·환승·휠체어 탑승의 경험을 설명하지 못한다. 현재의 파일럿 역시 추천 노선의 실제 저상버스 운행 시각, 환자별 목적지, 접근 가능한 보행경로 또는 실제 편익을 측정하지 않는다. 이를 해결하려면 공식 운행시각과 차량별 저상 배차, 왕복 실제 경로, 시간대별 통행수요, 현장 접근성을 별도로 결합해야 한다.
 
