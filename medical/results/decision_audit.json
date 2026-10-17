@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "fixed_policy_scenario_checks": 40,
+  "official_exception_routes": 25,
+  "budget_slots_per_policy": 50,
+  "capped_max": 5,
+  "base_gain_retained_by_capped": 0.9455682113328938,
+  "capped_changed_dongs": 75,
+  "observed_travel_outcomes": false,
+  "certified_financial_costs": false,
+  "scope": "saved allocations evaluated independently under all eight models; not global optimization or real-world impact verification"
+}

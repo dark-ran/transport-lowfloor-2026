@@ -1,0 +1,757 @@
+{
+  "all_policies_fixed_across_8_settings": true,
+  "robust_training_settings": [
+    "기본",
+    "반경300m",
+    "반경800m",
+    "최근접1곳",
+    "내부대표점"
+  ],
+  "additional_scope_checks": [
+    "분기집계군 포함",
+    "시간대제약 미반영",
+    "일반병원 포함"
+  ],
+  "per_route_cap_5": "illustrative concentration/implementation constraint, not actual depot capacity",
+  "robust_objective": "greedy lexicographic increase in minimum headroom-recovered gain over five settings, then mean; not global optimum",
+  "exception_screen": "25 official 2026 approved-exception routes excluded from new capped/robust and screened-proportional allocations; original allocation retained as comparison",
+  "budget_units": "vehicle replacement slots, not verified financial costs",
+  "failure_rule": "one allocated route unavailable; its slots remain unspent; allocation to other routes unchanged",
+  "no_observed_travel_benefit": true,
+  "fixed_table": [
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "기본",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6676262817135347,
+      "index_after": 0.6695346659195661,
+      "delta_index": 0.0019083842060315635,
+      "headroom_recovered": 0.0057416820315099966,
+      "changed_dongs": 62,
+      "zero_after": 38
+    },
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "반경300m",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.37776343885859615,
+      "index_after": 0.3797603419275401,
+      "delta_index": 0.0019969030689439317,
+      "headroom_recovered": 0.00320923454783965,
+      "changed_dongs": 56,
+      "zero_after": 143
+    },
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "반경800m",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.8757096451959959,
+      "index_after": 0.8767945344468187,
+      "delta_index": 0.0010848892508227236,
+      "headroom_recovered": 0.008728668065462577,
+      "changed_dongs": 34,
+      "zero_after": 9
+    },
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "최근접1곳",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.7539706003040889,
+      "index_after": 0.7557695842294337,
+      "delta_index": 0.0017989839253447853,
+      "headroom_recovered": 0.007312068913586362,
+      "changed_dongs": 20,
+      "zero_after": 77
+    },
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "내부대표점",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6514145294344312,
+      "index_after": 0.6530745414774176,
+      "delta_index": 0.001660012042986599,
+      "headroom_recovered": 0.004762137791610427,
+      "changed_dongs": 59,
+      "zero_after": 46
+    },
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "분기집계군 포함",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6727599408980965,
+      "index_after": 0.6746519642494108,
+      "delta_index": 0.0018920233513142484,
+      "headroom_recovered": 0.005781759594185463,
+      "changed_dongs": 61,
+      "zero_after": 36
+    },
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "시간대제약 미반영",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6758128676279235,
+      "index_after": 0.6775721765176299,
+      "delta_index": 0.0017593088897064494,
+      "headroom_recovered": 0.005426831339151527,
+      "changed_dongs": 55,
+      "zero_after": 38
+    },
+    {
+      "policy": "잔여대수 비례",
+      "scenario": "일반병원 포함",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.7948062722582571,
+      "index_after": 0.7960061352560778,
+      "delta_index": 0.0011998629978208475,
+      "headroom_recovered": 0.005847464301301629,
+      "changed_dongs": 31,
+      "zero_after": 36
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "기본",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.6676262817135347,
+      "index_after": 0.6862110386658121,
+      "delta_index": 0.01858475695227752,
+      "headroom_recovered": 0.05591524218006835,
+      "changed_dongs": 60,
+      "zero_after": 38
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "반경300m",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.37776343885859615,
+      "index_after": 0.39475988478129664,
+      "delta_index": 0.016996445922700495,
+      "headroom_recovered": 0.027315087193724122,
+      "changed_dongs": 32,
+      "zero_after": 145
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "반경800m",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.8757096451959959,
+      "index_after": 0.8859215769881859,
+      "delta_index": 0.010211931792189965,
+      "headroom_recovered": 0.08216190072265352,
+      "changed_dongs": 51,
+      "zero_after": 9
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "최근접1곳",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.7539706003040889,
+      "index_after": 0.7748256999745876,
+      "delta_index": 0.02085509967049867,
+      "headroom_recovered": 0.08476669737956229,
+      "changed_dongs": 39,
+      "zero_after": 77
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "내부대표점",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.6514145294344312,
+      "index_after": 0.6687064741648283,
+      "delta_index": 0.017291944730397187,
+      "headroom_recovered": 0.04960603981095816,
+      "changed_dongs": 60,
+      "zero_after": 45
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "분기집계군 포함",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.6727599408980965,
+      "index_after": 0.6913446978503742,
+      "delta_index": 0.01858475695227752,
+      "headroom_recovered": 0.05679242634071942,
+      "changed_dongs": 60,
+      "zero_after": 36
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "시간대제약 미반영",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.6758128676279235,
+      "index_after": 0.694019861856011,
+      "delta_index": 0.01820699422808753,
+      "headroom_recovered": 0.056161989203170996,
+      "changed_dongs": 60,
+      "zero_after": 38
+    },
+    {
+      "policy": "의료연결 우선",
+      "scenario": "일반병원 포함",
+      "spent": 50,
+      "route_count": 11,
+      "largest_route_addition": 9,
+      "index_before": 0.7948062722582571,
+      "index_after": 0.8066084998801671,
+      "delta_index": 0.011802227621910114,
+      "headroom_recovered": 0.05751748726337489,
+      "changed_dongs": 43,
+      "zero_after": 36
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "기본",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6676262817135347,
+      "index_after": 0.6695346659195661,
+      "delta_index": 0.0019083842060315635,
+      "headroom_recovered": 0.0057416820315099966,
+      "changed_dongs": 62,
+      "zero_after": 38
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "반경300m",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.37776343885859615,
+      "index_after": 0.3797603419275401,
+      "delta_index": 0.0019969030689439317,
+      "headroom_recovered": 0.00320923454783965,
+      "changed_dongs": 56,
+      "zero_after": 143
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "반경800m",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.8757096451959959,
+      "index_after": 0.8767945344468187,
+      "delta_index": 0.0010848892508227236,
+      "headroom_recovered": 0.008728668065462577,
+      "changed_dongs": 34,
+      "zero_after": 9
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "최근접1곳",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.7539706003040889,
+      "index_after": 0.7557695842294337,
+      "delta_index": 0.0017989839253447853,
+      "headroom_recovered": 0.007312068913586362,
+      "changed_dongs": 20,
+      "zero_after": 77
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "내부대표점",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6514145294344312,
+      "index_after": 0.6530745414774176,
+      "delta_index": 0.001660012042986599,
+      "headroom_recovered": 0.004762137791610427,
+      "changed_dongs": 59,
+      "zero_after": 46
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "분기집계군 포함",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6727599408980965,
+      "index_after": 0.6746519642494108,
+      "delta_index": 0.0018920233513142484,
+      "headroom_recovered": 0.005781759594185463,
+      "changed_dongs": 61,
+      "zero_after": 36
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "시간대제약 미반영",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.6758128676279235,
+      "index_after": 0.6775721765176299,
+      "delta_index": 0.0017593088897064494,
+      "headroom_recovered": 0.005426831339151527,
+      "changed_dongs": 55,
+      "zero_after": 38
+    },
+    {
+      "policy": "예외제외 비례",
+      "scenario": "일반병원 포함",
+      "spent": 50,
+      "route_count": 50,
+      "largest_route_addition": 1,
+      "index_before": 0.7948062722582571,
+      "index_after": 0.7960061352560778,
+      "delta_index": 0.0011998629978208475,
+      "headroom_recovered": 0.005847464301301629,
+      "changed_dongs": 31,
+      "zero_after": 36
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "기본",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.6676262817135347,
+      "index_after": 0.6851994371029563,
+      "delta_index": 0.01757315538942169,
+      "headroom_recovered": 0.052871675534453016,
+      "changed_dongs": 75,
+      "zero_after": 38
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "반경300m",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.37776343885859615,
+      "index_after": 0.3885495089929046,
+      "delta_index": 0.01078607013430845,
+      "headroom_recovered": 0.017334356108106134,
+      "changed_dongs": 37,
+      "zero_after": 145
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "반경800m",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.8757096451959959,
+      "index_after": 0.8860586735714135,
+      "delta_index": 0.01034902837541756,
+      "headroom_recovered": 0.08326493549509249,
+      "changed_dongs": 69,
+      "zero_after": 9
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "최근접1곳",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.7539706003040889,
+      "index_after": 0.7761856531159665,
+      "delta_index": 0.022215052811877602,
+      "headroom_recovered": 0.09029430157263765,
+      "changed_dongs": 43,
+      "zero_after": 77
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "내부대표점",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.6514145294344312,
+      "index_after": 0.6693389519137741,
+      "delta_index": 0.017924422479343075,
+      "headroom_recovered": 0.051420452063768676,
+      "changed_dongs": 74,
+      "zero_after": 45
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "분기집계군 포함",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.6727599408980965,
+      "index_after": 0.6903330962875184,
+      "delta_index": 0.01757315538942169,
+      "headroom_recovered": 0.0537011129922494,
+      "changed_dongs": 75,
+      "zero_after": 36
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "시간대제약 미반영",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.6758128676279235,
+      "index_after": 0.6926990107730123,
+      "delta_index": 0.016886143145088718,
+      "headroom_recovered": 0.05208764154682157,
+      "changed_dongs": 72,
+      "zero_after": 38
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "scenario": "일반병원 포함",
+      "spent": 50,
+      "route_count": 15,
+      "largest_route_addition": 5,
+      "index_before": 0.7948062722582571,
+      "index_after": 0.8058032854611933,
+      "delta_index": 0.010997013202936334,
+      "headroom_recovered": 0.053593320439000884,
+      "changed_dongs": 47,
+      "zero_after": 36
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "기본",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.6676262817135347,
+      "index_after": 0.6815665574763553,
+      "delta_index": 0.013940275762820652,
+      "headroom_recovered": 0.04194157057510139,
+      "changed_dongs": 45,
+      "zero_after": 37
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "반경300m",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.37776343885859615,
+      "index_after": 0.39515986269687453,
+      "delta_index": 0.017396423838278458,
+      "headroom_recovered": 0.02795789403047486,
+      "changed_dongs": 41,
+      "zero_after": 143
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "반경800m",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.8757096451959959,
+      "index_after": 0.8810562089989082,
+      "delta_index": 0.0053465638029123064,
+      "headroom_recovered": 0.04301672331166331,
+      "changed_dongs": 29,
+      "zero_after": 9
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "최근접1곳",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.7539706003040889,
+      "index_after": 0.7694269008932084,
+      "delta_index": 0.015456300589119521,
+      "headroom_recovered": 0.06282298216482783,
+      "changed_dongs": 21,
+      "zero_after": 76
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "내부대표점",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.6514145294344312,
+      "index_after": 0.6646295152591455,
+      "delta_index": 0.013214985824714224,
+      "headroom_recovered": 0.03791031738435149,
+      "changed_dongs": 45,
+      "zero_after": 45
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "분기집계군 포함",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.6727599408980965,
+      "index_after": 0.6867002166609173,
+      "delta_index": 0.013940275762820652,
+      "headroom_recovered": 0.04259953931397993,
+      "changed_dongs": 45,
+      "zero_after": 35
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "시간대제약 미반영",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.6758128676279235,
+      "index_after": 0.6893753806665541,
+      "delta_index": 0.013562513038630661,
+      "headroom_recovered": 0.041835445285547834,
+      "changed_dongs": 44,
+      "zero_after": 37
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "scenario": "일반병원 포함",
+      "spent": 50,
+      "route_count": 12,
+      "largest_route_addition": 5,
+      "index_before": 0.7948062722582571,
+      "index_after": 0.8033904271632436,
+      "delta_index": 0.008584154904986548,
+      "headroom_recovered": 0.04183439230555124,
+      "changed_dongs": 25,
+      "zero_after": 35
+    }
+  ],
+  "robust_steps": [
+    {
+      "route": "1124",
+      "added": 5,
+      "spent": 5,
+      "gains": [
+        0.002378523080803323,
+        0.0021352188844074305,
+        0.001582315211539895,
+        0.003567784621204984,
+        0.002871419132190957
+      ]
+    },
+    {
+      "route": "6642",
+      "added": 5,
+      "spent": 10,
+      "gains": [
+        0.0034670982360746434,
+        0.005623687146063406,
+        0.001582315211539895,
+        0.003989100619897565,
+        0.00368574378984953
+      ]
+    },
+    {
+      "route": "5611",
+      "added": 5,
+      "spent": 15,
+      "gains": [
+        0.005876848264094583,
+        0.007569638000151705,
+        0.002669078161064882,
+        0.006698660867253267,
+        0.0059536628111648855
+      ]
+    },
+    {
+      "route": "6648",
+      "added": 1,
+      "spent": 16,
+      "gains": [
+        0.006316964790135924,
+        0.007917852848179217,
+        0.003017242178518271,
+        0.006698660867253267,
+        0.006237322830056576
+      ]
+    },
+    {
+      "route": "3212",
+      "added": 2,
+      "spent": 18,
+      "gains": [
+        0.007238644011346043,
+        0.008595500647095907,
+        0.0036597371623898903,
+        0.007955706715372424,
+        0.007159002051266695
+      ]
+    },
+    {
+      "route": "3212",
+      "added": 1,
+      "spent": 19,
+      "gains": [
+        0.008153637893671396,
+        0.008934324546554252,
+        0.00466619349443473,
+        0.009392395796406357,
+        0.008073995933592048
+      ]
+    },
+    {
+      "route": "662",
+      "added": 4,
+      "spent": 23,
+      "gains": [
+        0.009551965423300703,
+        0.010261066740215118,
+        0.005121791203477341,
+        0.011360024487710656,
+        0.009640225819649928
+      ]
+    },
+    {
+      "route": "2224",
+      "added": 2,
+      "spent": 25,
+      "gains": [
+        0.009959890022557885,
+        0.010876916113401821,
+        0.005121791203477341,
+        0.011841440855226686,
+        0.009831168560861185
+      ]
+    },
+    {
+      "route": "2224",
+      "added": 2,
+      "spent": 27,
+      "gains": [
+        0.010367814621815068,
+        0.011492765486588525,
+        0.005121791203477341,
+        0.012322857222742716,
+        0.010022111302072442
+      ]
+    },
+    {
+      "route": "2224",
+      "added": 1,
+      "spent": 28,
+      "gains": [
+        0.010571776921443659,
+        0.011800690173181876,
+        0.005121791203477341,
+        0.012563565406500731,
+        0.01011758267267807
+      ]
+    },
+    {
+      "route": "6620",
+      "added": 5,
+      "spent": 33,
+      "gains": [
+        0.011835605019083838,
+        0.013302569145121767,
+        0.005121791203477341,
+        0.014052350563742655,
+        0.01187767248939889
+      ]
+    },
+    {
+      "route": "2236",
+      "added": 5,
+      "spent": 38,
+      "gains": [
+        0.012540057474087894,
+        0.014596259319374782,
+        0.005121791203477341,
+        0.015295920559654352,
+        0.012447745849947251
+      ]
+    },
+    {
+      "route": "4319",
+      "added": 5,
+      "spent": 43,
+      "gains": [
+        0.01306378713690419,
+        0.015794791096879125,
+        0.005121791203477341,
+        0.015295920559654352,
+        0.012781236582463835
+      ]
+    },
+    {
+      "route": "6511",
+      "added": 5,
+      "spent": 48,
+      "gains": [
+        0.013577218586484899,
+        0.016983432303629486,
+        0.005121791203477341,
+        0.015295920559654352,
+        0.012861167952401508
+      ]
+    },
+    {
+      "route": "5634",
+      "added": 2,
+      "spent": 50,
+      "gains": [
+        0.013940275762820652,
+        0.017396423838278458,
+        0.005346563802912307,
+        0.01545630058911952,
+        0.013214985824714228
+      ]
+    }
+  ],
+  "failure_summary": [
+    {
+      "policy": "예외제외 비례",
+      "worst_base_delta": 0.0017044219064029718,
+      "worst_min_normalized": 0.0027143669913133866,
+      "max_unused": 1
+    },
+    {
+      "policy": "예외제외·5조건 강건5대",
+      "worst_base_delta": 0.011561752682017331,
+      "worst_min_normalized": 0.022351556377706784,
+      "max_unused": 5
+    },
+    {
+      "policy": "예외제외·노선당5대 의료우선",
+      "worst_base_delta": 0.01516340536140175,
+      "worst_min_normalized": 0.013902833407976337,
+      "max_unused": 5
+    },
+    {
+      "policy": "의료연결 우선",
+      "worst_base_delta": 0.015812333813229475,
+      "worst_min_normalized": 0.014602855526127287,
+      "max_unused": 9
+    },
+    {
+      "policy": "잔여대수 비례",
+      "worst_base_delta": 0.0017044219064029718,
+      "worst_min_normalized": 0.0027143669913133866,
+      "max_unused": 1
+    }
+  ]
+}

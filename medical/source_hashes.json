@@ -7,5 +7,6 @@
   "행정동경계_서울_20250401.geojson": "9597cd1b341485a6d2e59a154c6827af21faa96a8ab52fd118dd844345dcded8",
   "current_case_stops.json": "563dc4337d7ef0081c33f63b623389f9fd2a627c8f8cf5f5eb807d171b818091",
   "노선정보_20261017.csv": "ff616957cb3e16443bad2b84f5be4980cfa615a5323eb4649c26f3c30e2f9074",
-  "topis_case_metadata.json": "46358445dae0a4f6a63e39200fec8f729900a779cd203778132e6ac1fb8e5cc2"
+  "topis_case_metadata.json": "46358445dae0a4f6a63e39200fec8f729900a779cd203778132e6ac1fb8e5cc2",
+  "exception_routes_2026.json": "f12669ba51f76cd373ef6d765f71b6265bc307bb6ad80a25ea5fa3e63bd5220d"
 }
