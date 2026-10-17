@@ -1,0 +1,33 @@
+{
+  "model_attributable_pairs": 99,
+  "status_counts": {
+    "not_in_69_route_snapshot": 69,
+    "bidirectional": 26,
+    "one_direction": 4
+  },
+  "cached_route_names": 69,
+  "model_routes_with_snapshot": [
+    "3319",
+    "3413",
+    "343",
+    "662"
+  ],
+  "model_routes_missing_snapshot": [
+    "1124",
+    "1213",
+    "1222",
+    "3212",
+    "3323",
+    "5413",
+    "5611",
+    "6620",
+    "6629",
+    "6648",
+    "7211"
+  ],
+  "logic": "500m straight-line endpoint radius, strictly increasing stop sequence, no crossing an annotated turning point, outbound and return independently",
+  "no_direct_found_meaning": "No ordered direct leg in captured route snapshot. Transfers, walking, rail, alternative routes or later service could exist.",
+  "empirical_lowfloor_departures_observed": false,
+  "representative_sample": false,
+  "no_live_bus_query": true
+}

@@ -1,0 +1,16 @@
+﻿route,proposed_replacements,2025_fleet,2025_lowfloor,2025_highfloor_remaining,official_2026_exception_screen,nominal_2026_route_headway_available,2026_nominal_weekday_headway_min,archived_route_order_available,some_pairs_bidirectional_order_valid,cached_pairs_tested,cached_bidirectional_pairs,bus_vehicle_level_age_or_decommission_verified,bus_vehicle_level_lowfloor_departures_verified,depot_or_charging_capacity_verified,accessible_pedestrian_access_verified,actual_unit_cost_or_maintenance_cost_verified,real_patient_boarding_or_benefit_verified,operational_decision
+343,5,18,12,6,not_in_25_exception_list,True,15.0,True,True,7,4,False,False,False,False,False,False,hold_for_field_verification
+662,4,17,13,4,not_in_25_exception_list,True,12.0,True,True,8,8,False,False,False,False,False,False,hold_for_field_verification
+1124,5,6,1,5,not_in_25_exception_list,True,14.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+1213,2,21,19,2,not_in_25_exception_list,True,12.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+1222,1,11,10,1,not_in_25_exception_list,True,10.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+3212,3,10,7,3,not_in_25_exception_list,True,14.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+3319,2,12,10,2,not_in_25_exception_list,True,17.0,True,True,6,5,False,False,False,False,False,False,hold_for_field_verification
+3323,2,15,13,2,not_in_25_exception_list,True,15.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+3413,5,26,21,5,not_in_25_exception_list,True,9.0,True,True,9,9,False,False,False,False,False,False,hold_for_field_verification
+5413,1,27,26,1,not_in_25_exception_list,True,7.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+5611,5,5,0,5,not_in_25_exception_list,True,17.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+6620,5,9,2,7,not_in_25_exception_list,True,15.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+6629,5,24,19,5,not_in_25_exception_list,True,11.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+6648,1,14,13,1,not_in_25_exception_list,True,13.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification
+7211,4,29,25,4,not_in_25_exception_list,True,9.0,False,False,0,0,False,False,False,False,False,False,hold_for_field_verification

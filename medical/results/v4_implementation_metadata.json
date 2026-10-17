@@ -1,0 +1,20 @@
+{
+  "allocated_routes": 15,
+  "hypothetical_replacements": 50,
+  "published_nominal_headway_routes": 15,
+  "snapshot_route_order_routes": 4,
+  "at_least_one_bidirectional_example_routes": 4,
+  "implementation_gates_met": {
+    "bus_vehicle_level_age_or_decommission_verified": 0,
+    "bus_vehicle_level_lowfloor_departures_verified": 0,
+    "depot_or_charging_capacity_verified": 0,
+    "accessible_pedestrian_access_verified": 0,
+    "actual_unit_cost_or_maintenance_cost_verified": 0,
+    "real_patient_boarding_or_benefit_verified": 0
+  },
+  "field_verified_operational_approvals": 0,
+  "approved_replacement_decisions": 0,
+  "explanation": "2025 high-floor remainder and 2026 route nominal interval are not vehicle-by-vehicle replacement eligibility.",
+  "exception_scope": "Only excludes IDs/names published in the archived 25-route 2026 exception dataset; not complete approval",
+  "gate_state": "All 15 policy candidates stay preliminary and unapproved until real operational/cost/accessibility evidence is available."
+}

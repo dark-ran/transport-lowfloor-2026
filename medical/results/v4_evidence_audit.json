@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "validated_model_attributable_pairs": 99,
+  "policy_candidate_routes": 15,
+  "hypothetical_replacements": 50,
+  "verified_vehicle_arrivals": 0,
+  "verified_boardings": 0,
+  "verified_operational_approvals": 0,
+  "source": "Archived static bus-stop order and 2025 fleet, NOT observations of real passenger trips"
+}

@@ -1,0 +1,79 @@
+{
+  "mode": "NO_CAPTURE_PERFORMED",
+  "requests": [
+    {
+      "route": "3413",
+      "route_id": "100100225",
+      "dong": "천호1동",
+      "hospital": "강동경희대학교병원",
+      "direction": "outbound",
+      "boarding_station": "사랑플러스병원건강증진센터",
+      "boarding_seq": 83,
+      "startOrd": 82,
+      "endOrd": 84,
+      "purpose": "potential bus-type snapshot, NOT actual boarding/arrival"
+    },
+    {
+      "route": "3413",
+      "route_id": "100100225",
+      "dong": "천호1동",
+      "hospital": "강동경희대학교병원",
+      "direction": "return",
+      "boarding_station": "강동아트센터.강동경희대병원",
+      "boarding_seq": 13,
+      "startOrd": 12,
+      "endOrd": 14,
+      "purpose": "potential bus-type snapshot, NOT actual boarding/arrival"
+    },
+    {
+      "route": "343",
+      "route_id": "107000002",
+      "dong": "위례동",
+      "hospital": "삼성서울병원",
+      "direction": "outbound",
+      "boarding_station": "송파더센트레.송례초앞",
+      "boarding_seq": 9,
+      "startOrd": 8,
+      "endOrd": 10,
+      "purpose": "potential bus-type snapshot, NOT actual boarding/arrival"
+    },
+    {
+      "route": "343",
+      "route_id": "107000002",
+      "dong": "위례동",
+      "hospital": "삼성서울병원",
+      "direction": "return",
+      "boarding_station": "삼성서울병원후문",
+      "boarding_seq": 53,
+      "startOrd": 52,
+      "endOrd": 54,
+      "purpose": "potential bus-type snapshot, NOT actual boarding/arrival"
+    },
+    {
+      "route": "662",
+      "route_id": "100100550",
+      "dong": "신월3동",
+      "hospital": "서울특별시서남병원",
+      "direction": "outbound",
+      "boarding_station": "양서중학교",
+      "boarding_seq": 5,
+      "startOrd": 4,
+      "endOrd": 6,
+      "purpose": "potential bus-type snapshot, NOT actual boarding/arrival"
+    },
+    {
+      "route": "662",
+      "route_id": "100100550",
+      "dong": "신월3동",
+      "hospital": "서울특별시서남병원",
+      "direction": "return",
+      "boarding_station": "강월초등학교.신월시영아파트",
+      "boarding_seq": 64,
+      "startOrd": 63,
+      "endOrd": 65,
+      "purpose": "potential bus-type snapshot, NOT actual boarding/arrival"
+    }
+  ],
+  "real_vehicle_observations": 0,
+  "no_credentials_embedded": true
+}
