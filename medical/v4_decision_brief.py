@@ -33,7 +33,7 @@ def generate(out):
         "## 2. 교체로 완화될 수 있는 지역과 다른 정책이 필요한 지역",
         "",
         f"- 동–병원 모델 쌍: **{v3['input_model_pairs']:,}개**. "
-        f"그중 정적 공유노선 없는 쌍: **{n.get('placeholder',0) if False else next(int(x['pairs']) for x in v3['pair_classes'] if x['class']=='no_shared_route')}개**.",
+        f"그중 정적 공유노선 없는 쌍: **{next(int(x['pairs']) for x in v3['pair_classes'] if x['class']=='no_shared_route')}개**.",
         f"- 모델 정의 내 가까운 종합병원 3곳 모두와 공유노선이 없는 행정동: "
         f"**{v3['all_three_nearest_hospital_pairs_without_shared_route_dongs']}개**.",
         "",
@@ -61,10 +61,10 @@ def generate(out):
         "",
         "## 4. 실제 운행 확인을 위한 검증 가능한 수집 단계",
         "",
-        "서울시 버스위치정보조회 서비스는 공개 명세에서 차량유형 \`busType\` "
-        "(0=일반, 1=저상)을 안내한다. 서비스키가 있는 경우 \`v4_vehicle_snapshot.py --capture\`로 "
+        "서울시 버스위치정보조회 서비스는 공개 명세에서 차량유형 `busType` "
+        "(0=일반, 1=저상)을 안내한다. 서비스키가 있는 경우 `v4_vehicle_snapshot.py --capture`로 "
         "**실제 위치 조회 응답의 차량 유형**을 수집할 수 있다. "
-        "기본 \`python medical/v4_vehicle_snapshot.py\`는 API 호출 없는 manifest 점검이다.",
+        "기본 `python medical/v4_vehicle_snapshot.py`는 API 호출 없는 manifest 점검이다.",
         "",
         "중요하게도 차량 위치의 단일 스냅샷은 정류장 실제 도착, 이용자가 탑승할 수 있었는지, "
         "저상차량 운행간격·대기시간을 나타내지 않는다. 오류와 결측을 '버스가 없었다'로 해석하면 안 된다. "
@@ -80,10 +80,10 @@ def generate(out):
         "",
         "## 6. 재현과 출처",
         "",
-        "- \`v4_directional_pairs.csv\`: 모델상 기여가 있는 전체 후보 쌍의 방향별 검증 상태",
-        "- \`v4_implementation_gates.csv\`: 15개 노선별 공식 예외·차량·운행·접근·비용·집행 적격성",
-        "- \`v4_capture_manifest.json\`: 자료 수집 대상 명세. **실측 데이터가 아님**",
-        "- \`validation_v4_receipt.json\`: 코드 재현·단위 테스트 이후 원자료 및 산출물 SHA 기록",
+        "- `v4_directional_pairs.csv`: 모델상 기여가 있는 전체 후보 쌍의 방향별 검증 상태",
+        "- `v4_implementation_gates.csv`: 15개 노선별 공식 예외·차량·운행·접근·비용·집행 적격성",
+        "- `v4_capture_manifest.json`: 자료 수집 대상 명세. **실측 데이터가 아님**",
+        "- `validation_v4_receipt.json`: 코드 재현·단위 테스트 이후 원자료 및 산출물 SHA 기록",
         "",
         "기초 자료 시점: 2025년 저상버스 차량·정류소·고령인구, 2026년 취득 노선정보·병원자료. "
         "명세 출처: https://www.data.go.kr/data/15000332/openapi.do.",
