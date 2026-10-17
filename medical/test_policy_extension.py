@@ -30,14 +30,14 @@ class ExtensionTests(unittest.TestCase):
     def test_directional_route_order_is_respected(self):
         stops = pd.DataFrame({
             "routNm": ["343"] * 3, "routeId": ["R"] * 3,
-            "stationOrd": [1, 2, 3], "posY": [37.5, 37.501, 37.502],
+            "stationOrd": [1, 2, 3], "posY": [37.5, 37.51, 37.52],
             "posX": [127.0] * 3,
             "turnPlaceStationYn": ["N"] * 3,
             "guganLen": [0, 100, 100],
             "stationId": ["S1", "S2", "S3"],
             "stnName": ["a", "b", "c"], "arsId": ["1", "2", "3"]
         })
-        a, b = [37.5, 127.0], [37.502, 127.0]
+        a, b = [37.5, 127.0], [37.52, 127.0]
         forward = first_direct(stops, a, b)
         self.assertIsNotNone(forward)
         self.assertIsNone(first_direct(stops, b, a))
