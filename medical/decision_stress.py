@@ -12,8 +12,13 @@ def load_models():
  configs=[('기본',500,3,'centroid',False,True,h),('반경300m',300,3,'centroid',False,True,h),('반경800m',800,3,'centroid',False,True,h),('최근접1곳',500,1,'centroid',False,True,h),('내부대표점',500,3,'interior',False,True,h),('분기집계군 포함',500,3,'centroid',True,True,h),('시간대제약 미반영',500,3,'centroid',False,False,h),('일반병원 포함',500,3,'centroid',False,True,allh[allh.kind.isin(['종합병원','병원'])].reset_index(drop=True))]
  models={name:build(o,f,rs,hh,r,k,pt,inc,day) for name,r,k,pt,inc,day,hh in configs};return o,models
 
-def capped_greedy(models,budget,cap_per_route=5,robust=False):
- base=models[0];ff=base['f'];routes=ff.route.tolist();n=ff.fleet.to_numpy(int);low=ff.low.to_numpy(int);cap=np.minimum(n-low,cap_per_route);banned=set(json.loads((ROOT/'raw/exception_routes_2026.json').read_text(encoding='utf-8'))['routes']);cap[np.array([x in banned for x in routes])]=0;a=np.zeros(len(n),int)
+def capped_greedy(models,budget,cap_per_route=5,robust=False,cap_by_route=None):
+ base=models[0];ff=base['f'];routes=ff.route.tolist();n=ff.fleet.to_numpy(int);low=ff.low.to_numpy(int);cap=np.minimum(n-low,cap_per_route);
+ if cap_by_route is not None:
+  extra=np.asarray(cap_by_route)
+  assert extra.shape == cap.shape and (extra>=0).all() and (extra==extra.astype(int)).all()
+  cap=np.minimum(cap,extra.astype(int))
+ banned=set(json.loads((ROOT/'raw/exception_routes_2026.json').read_text(encoding='utf-8'))['routes']);cap[np.array([x in banned for x in routes])]=0;a=np.zeros(len(n),int)
  prepared=[]
  for m in models:
   pos=m['f'].set_index('route').index.get_indexer(routes);assert (pos>=0).all();mn=m['f'].fleet.to_numpy(float);ml=m['f'].low.to_numpy(float);C=m['C'][:,pos];s=scores(m['C'],m['walk'],ml/mn);gap=1-float(s@m['weights']);prepared.append((m,C,s.copy(),s.copy(),gap))

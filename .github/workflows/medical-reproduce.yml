@@ -7,6 +7,12 @@ on:
       - 'medical/**'
       - 'README.md'
       - '.github/workflows/medical-reproduce.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'medical/**'
+      - 'README.md'
+      - '.github/workflows/medical-reproduce.yml'
 
 concurrency:
   group: medical-${{ github.event.pull_request.number || github.ref }}
@@ -29,10 +35,9 @@ jobs:
         run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-nanum
       - name: Install pinned dependencies
         run: python -m pip install -r requirements.txt
-      - name: Execute complete medical analysis and independent audits
+      - name: Run full analyses, regression tests and output hashes
         run: python medical/reproduce_all.py
-      - name: Publish reproducibility outputs
-        if: always()
+      - name: Upload versioned reproducibility outputs
         uses: actions/upload-artifact@v4
         with:
           name: medical-validation-outputs
@@ -42,4 +47,41 @@ jobs:
             medical/results/cap_*.png
             medical/results/cap5_*.csv
             medical/results/cap5_*.json
-          if-no-files-found: warn
+            medical/results/headway_*.csv
+            medical/results/headway_*.json
+            medical/results/feasibility_*.csv
+            medical/results/feasibility_*.json
+            medical/results/toy_*.csv
+            medical/results/toy_*.json
+            medical/results/route_case_brief.md
+            medical/results/validation_v2_receipt.json
+          if-no-files-found: error
+
+  publish_verified_results:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: reproduce
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: medical-validation-outputs
+          path: medical/results
+      - name: Commit only verified derived outputs to the repository
+        run: |
+          git add medical/results/cap_*.csv medical/results/cap_*.json medical/results/cap_*.png
+          git add medical/results/cap5_*.csv medical/results/cap5_*.json
+          git add medical/results/headway_*.csv medical/results/headway_*.json
+          git add medical/results/feasibility_*.csv medical/results/feasibility_*.json
+          git add medical/results/toy_*.csv medical/results/toy_*.json
+          git add medical/results/route_case_brief.md medical/results/validation_v2_receipt.json
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "results: publish reproducible medical validation outputs"
+            git push
+          fi
