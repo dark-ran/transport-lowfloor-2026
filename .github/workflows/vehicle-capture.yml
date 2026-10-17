@@ -1,29 +1,49 @@
 name: Manual real bus snapshot
 on:
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   capture:
+    name: Optional bus snapshot (credentials required)
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Check real API credentials
+      - name: Check API credential availability without failing
+        id: credentials
         env:
           SEOUL_BUS_API_KEY: ${{ secrets.SEOUL_BUS_API_KEY }}
         run: |
           python - <<'PY'
-          import os,sys
-          if not os.environ.get('SEOUL_BUS_API_KEY','').strip():
-              sys.exit('No API calls made. Register repository Actions Secret SEOUL_BUS_API_KEY first.')
+          import os
+          ready=bool(os.environ.get('SEOUL_BUS_API_KEY','').strip())
+          with open(os.environ['GITHUB_OUTPUT'],'a',encoding='utf-8') as f:
+              f.write('ready='+str(ready).lower()+'\n')
+          if not ready:
+              print('::notice title=Snapshot skipped::SEOUL_BUS_API_KEY not configured. No API calls were made; this is an expected, non-failing condition.')
+              with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+                  f.write('### Snapshot not attempted — missing credential\n\n')
+                  f.write('- Status: **NOT_RUN_NO_CREDENTIALS**\n')
+                  f.write('- API calls: **0**; vehicle observations: **0**\n')
+                  f.write('- This is not evidence of missing bus service.\n')
+                  f.write('- To collect real data, register repository Actions Secret SEOUL_BUS_API_KEY before manually dispatching this workflow.\n')
+          else:
+              print('::notice title=Snapshot configured::Credential available; attempting one-shot vehicle-position observations.')
           PY
+
+      - uses: actions/checkout@v4
+        if: steps.credentials.outputs.ready == 'true'
+      - uses: actions/setup-python@v5
+        if: steps.credentials.outputs.ready == 'true'
+        with:
+          python-version: '3.12'
       - name: Install collector dependency
+        if: steps.credentials.outputs.ready == 'true'
         run: python -m pip install pandas==3.0.1
       - name: Generate ephemeral pseudonym salt
+        if: steps.credentials.outputs.ready == 'true'
         run: |
           python - <<'PY'
           import os,secrets
@@ -33,24 +53,42 @@ jobs:
               f.write('V4_VEHICLE_SALT='+salt+'\n')
           PY
       - name: Capture six explicit route-direction snapshots
+        if: steps.credentials.outputs.ready == 'true'
         env:
           SEOUL_BUS_API_KEY: ${{ secrets.SEOUL_BUS_API_KEY }}
         run: |
           python medical/v4_vehicle_snapshot.py --capture --output "$RUNNER_TEMP/vehicle_observations.jsonl" > "$RUNNER_TEMP/capture_receipt.json"
           python medical/v4_capture_summary.py --receipt "$RUNNER_TEMP/capture_receipt.json" --private-jsonl "$RUNNER_TEMP/vehicle_observations.jsonl" --output "$RUNNER_TEMP/public/vehicle_capture_summary.json" --commit "$GITHUB_SHA"
-      - name: Publish aggregate receipt only
+      - name: Report provider availability without treating absent evidence as failure
+        if: steps.credentials.outputs.ready == 'true'
+        run: |
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          receipt=json.loads((Path(os.environ['RUNNER_TEMP'])/'public/vehicle_capture_summary.json').read_text(encoding='utf-8'))
+          requested=receipt['api_requests_executed']
+          successful=receipt['successful_requests']
+          snapshots=receipt['vehicle_snapshots']
+          if successful == 0:
+              status='PROVIDER_UNAVAILABLE_OR_REQUEST_ERROR'
+              print('::warning title=No successful provider response::All provider requests failed; no actual service or boarding conclusion is possible.')
+          elif snapshots == 0:
+              status='PROVIDER_RESPONDED_NO_POSITION_SNAPSHOTS'
+              print('::notice title=No position snapshots::Provider responded, but no vehicle snapshots were observed; not proof of absent service.')
+          else:
+              status='POSITION_SNAPSHOTS_ONLY'
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+              f.write('### Vehicle-position API evidence status\n\n')
+              f.write(f'- Status: **{status}**\n')
+              f.write(f'- Attempted requests: **{requested}**; provider-successful: **{successful}**; snapshots: **{snapshots}**\n')
+              f.write('- These snapshots do not confirm arrivals, boarding or actual low-floor vehicle headways.\n')
+              f.write('- No private vehicle identifiers, pseudonyms or API secrets are published.\n')
+          PY
+      - name: Publish aggregate receipt only (no private vehicle identifiers)
+        if: steps.credentials.outputs.ready == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: bus-vehicle-aggregate-${{ github.run_id }}
           path: ${{ runner.temp }}/public/vehicle_capture_summary.json
           if-no-files-found: error
           retention-days: 30
-      - name: Fail visibly when all provider requests failed
-        run: |
-          python - <<'PY'
-          import json,os,sys
-          from pathlib import Path
-          r=json.loads((Path(os.environ['RUNNER_TEMP'])/'public/vehicle_capture_summary.json').read_text())
-          if r['successful_requests']==0:
-              sys.exit('All API requests failed; see aggregate receipt. No real service claim is possible.')
-          PY
