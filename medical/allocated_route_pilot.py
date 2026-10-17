@@ -52,6 +52,10 @@ def main():
         selected.setdefault(label, []).append(df)
     live = {str(r["routId"]): r for r in json.loads(
         (ROOT / "raw/topis_case_metadata.json").read_text(encoding="utf-8"))}
+    meta = pd.read_csv(ROOT / "raw/노선정보_20261017.csv", dtype=str).fillna("")
+    meta.columns = [x.replace("\ufeff", "").strip() for x in meta.columns]
+    meta = meta.map(lambda x: x.replace("\ufeff", "").strip())
+    by_id = meta.drop_duplicates("노선ID").set_index("노선ID")
     origin_index = {str(code): i for i, code in enumerate(origins.code.astype(str))}
     rows = []
     n_pairs_considered = 0
@@ -74,7 +78,11 @@ def main():
                 if not (found_out or found_back):
                     continue
                 route_id = str(frame.routeId.iloc[0])
-                meta = live.get(route_id, {})
+                archived = by_id.loc[route_id] if route_id in by_id.index else None
+                published = str(archived["배차"]) if archived is not None else ""
+                if route_id in live:
+                    assert not published or published == str(live[route_id].get("norTerms", ""))
+                headway_source = "2026-10-17 archived BIS route information" if published else "unknown"
                 item = {
                     "dong_code": str(pair.dong_code), "gu": str(o.gu), "dong": str(o.dong),
                     "hospital": str(pair.hospital_name), "route": a.route,
@@ -82,7 +90,8 @@ def main():
                     "static_lowfloor_ratio_before": float(a.low_before / a.fleet),
                     "static_lowfloor_ratio_after": float((a.low_before + a.added) / a.fleet),
                     "base_dong_index_gain": float(improved.loc[str(pair.dong_code), "delta_index"]),
-                    "weekday_published_route_headway_min": meta.get("norTerms", ""),
+                    "weekday_published_route_headway_min": published,
+                    "weekday_headway_source": headway_source,
                     "outbound_direct": bool(found_out), "return_direct": bool(found_back),
                     "both_directions": bool(found_out and found_back),
                     "outbound_leg": json.dumps(compact_leg(found_out), ensure_ascii=False),
