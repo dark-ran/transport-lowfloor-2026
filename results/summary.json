@@ -1,0 +1,40 @@
+{
+  "source": "https://data.seoul.go.kr/dataList/OA-22229/F/1/datasetView.do",
+  "date": "2025-04-25",
+  "retrieved": "2026-10-17",
+  "sha256": "de310eeffd3d2437139f9f4fe192b9b969af9e8a1546f31153494d08b78761f4",
+  "raw_rows": 348,
+  "valid_rows": 335,
+  "zero_fleet_rows": 13,
+  "fleet": 6825,
+  "low": 5292,
+  "weighted_rate": 0.7753846153846153,
+  "unweighted_rate": 0.7373952939672933,
+  "zero_low_routes": 19,
+  "full_routes": 96,
+  "below50": 59,
+  "zero_fleet_ids": [
+    "8002",
+    "8112",
+    "8332",
+    "8661",
+    "8772",
+    "8442",
+    "서울02",
+    "서울04",
+    "서울05",
+    "서울07",
+    "서울08",
+    "서울09",
+    "서울10"
+  ],
+  "cluster_k": 2,
+  "silhouette": {
+    "2": 0.4943358782528743,
+    "3": 0.4530777594721342,
+    "4": 0.4125954479936585,
+    "5": 0.4264442256104397,
+    "6": 0.42293050887694256
+  },
+  "cluster_ari_min": 1.0
+}
