@@ -32,6 +32,11 @@ STAGES = [
     "route_marginal.py",
     "allocated_route_pilot.py",
     "route_case_brief.py",
+    "v4_directional_audit.py",
+    "v4_implementation_gates.py",
+    "v4_vehicle_snapshot.py",
+    "v4_evidence_audit.py",
+    "v4_decision_brief.py",
     "v3_policy_brief.py"
 ]
 
@@ -48,7 +53,7 @@ def main():
     subprocess.run([sys.executable, str(ROOT / "medical" / "validation_receipt.py")],
                    cwd=ROOT, check=True)
     print("\nAll offline stages and tests finished. Validation receipt saved in "
-          "medical/results/validation_v3_receipt.json.")
+          "medical/results/validation_v4_receipt.json.")
 
 
 if __name__ == "__main__":
