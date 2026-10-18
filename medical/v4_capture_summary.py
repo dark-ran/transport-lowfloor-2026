@@ -7,12 +7,14 @@ from v4_vehicle_snapshot import ROOT
 
 def summarize(receipt,rows,requests,commit):
  failed={(x['route'],x['direction']) for x in receipt['failed_requests']}
+ errors={(x['route'],x['direction']):x for x in receipt['failed_requests']}
  groups=[]
  for r in requests:
   selected=[x for x in rows if x['route']==r['route'] and x['direction']==r['direction']]
   types=Counter(x['vehicle_type'] for x in selected)
   groups.append({'route':r['route'],'direction':r['direction'],
    'status':'api_error_or_missing' if (r['route'],r['direction']) in failed else ('success_with_snapshots' if selected else 'success_empty'),
+   'error':{k:errors[(r['route'],r['direction'])].get(k) for k in ['exception_type','http_status','provider_code']} if (r['route'],r['direction']) in errors else None,
    'snapshots':len(selected),'distinct_vehicle_pseudonyms_in_query':len({x['vehicle_pseudonym'] for x in selected}),
    'low_floor_snapshots':types['low_floor'],'ordinary_snapshots':types['ordinary'],'unknown_type_snapshots':types['unknown']})
  return {'schema_version':1,'created_at_utc':datetime.now(timezone.utc).isoformat(),

@@ -29,3 +29,5 @@ python medical/v4_vehicle_snapshot.py --capture --output <저장소 바깥의 �
 - `test_vehicle_capture.py`는 기본 무호출·인증키 미설정·저장소 출력 금지·응답 헤더·키 인코딩·공개 집계의 식별자 제거를 모의 응답으로 검사한다. 모의 응답은 실제 관측 데이터가 아니다.
 
 API 출처: 서울특별시 버스위치정보조회 서비스(공공저작물 출처표시 제1유형). 자세한 필드·이용조건은 위 공식 설명을 따른다.
+
+연결 주소는 공식 안내의 `http://ws.bus.go.kr/api/rest/buspos/getBusPosByRouteSt` 를 사용한다. HTTPS로 임의 치환하지 않는다. HTTP에서는 키 전송이 암호화되지 않는다. 인증 URL·예외 메시지 전문 대신 오류 종류·HTTP 상태·제공기관 오류번호만 집계에 기록한다.

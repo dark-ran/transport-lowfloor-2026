@@ -72,7 +72,7 @@ GitHub Actions는 풀리퀘스트에서 위 파이프라인을 검사하고 실�
 
 - `v4_directional_audit.py`: 기존 분산형에서 모형 개선에 기여한다고 계산된 **전체 동–병원–노선 쌍**을 기존에 취득한 69개 노선 정류소 순서 스냅샷과 대조한다. 추천 노선이 스냅샷에 없는 경우, 양방향 정류소 순서가 성립하는 경우, 한쪽 방향만 가능한 경우, 순서상 직접 경로를 찾지 못한 경우를 구분한다. 이 검사에 지하철·환승·실제 시간표를 넣지 않았으며 누락은 미운행 증거가 아니다.
 - `v4_implementation_gates.py`: 50대 분산형에서 선택한 15개 노선별로 공식 25개 예외노선 목록 확인, 2025 잔여 고상버스, 2026 일반 공시배차, 스냅샷 방향 기록을 제공한다. 이 정보만으로 **차량 차령·대폐차 적격성, 차고지·충전, 가격·유지비, 실제 저상 배차 및 보행 접근성**을 확인했다고 표시하지 않으며 승인 결과는 모두 보류한다.
-- `v4_vehicle_snapshot.py`: 기본은 실시간 API를 **요청하지 않는 드라이런**. 기본 실행에서 `results/v4_capture_manifest.json`이라는 인증키 없는 요청계획을 남긴다. 사용자가 발급받은 `SEOUL_BUS_API_KEY`와 16자 이상 비밀값 `V4_VEHICLE_SALT`을 환경변수로 설정한 후, `--capture --output /outside-repository/path.jsonl`을 명시했을 때만 공식 HTTPS 버스위치 API를 호출한다. 응답에는 차량유형·관측시각·가명차량키만 제한적으로 남기고 번호판·차량ID·서비스키는 남기지 않는다. **한 번의 버스 위치 조회로 탑승/도착/실제 배차간격을 입증하지 않는다.** API 미응답과 조회 빈 결과는 모두 미확인으로 처리한다.
+- `v4_vehicle_snapshot.py`: 기본은 실시간 API를 **요청하지 않는 드라이런**. 기본 실행에서 `results/v4_capture_manifest.json`이라는 인증키 없는 요청계획을 남긴다. 사용자가 발급받은 `SEOUL_BUS_API_KEY`와 16자 이상 비밀값 `V4_VEHICLE_SALT`을 환경변수로 설정한 후, `--capture --output /outside-repository/path.jsonl`을 명시했을 때만 공식 HTTP 버스위치 API를 호출한다. 응답에는 차량유형·관측시각·가명차량키만 제한적으로 남기고 번호판·차량ID·서비스키는 남기지 않는다. **한 번의 버스 위치 조회로 탑승/도착/실제 배차간격을 입증하지 않는다.** API 미응답과 조회 빈 결과는 모두 미확인으로 처리한다.
 - `v4_evidence_audit.py`: 정적 경로 검사·정책별 배분 50대·현장 미검증 게이트·실측 0건 선언의 일치성을 재검토한다.
 - `v4_decision_brief.py`: 기존 모델 수치와 증거 확보 범위를 심사위원용 정책판단 요약 `results/v4_decision_brief.md`에 자동 반영한다.
 - 최종 전체 재현 검사 `python medical/reproduce_all.py`은 위 확장과 테스트를 실행하고 `results/validation_v4_receipt.json`에 원자료 및 주요 결과 파일의 해시를 남긴다.

@@ -18,13 +18,14 @@ import hashlib
 import hmac
 import json
 import os
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 import pandas as pd
 
 ROOT=Path(__file__).resolve().parent
-API="https://ws.bus.go.kr/api/rest/buspos/getBusPosByRouteSt"
+API="http://ws.bus.go.kr/api/rest/buspos/getBusPosByRouteSt"
 ROUTES=("662","343","3413")
 
 
@@ -109,17 +110,21 @@ def collect(requests,api_key,salt,output):
             "serviceKey":urllib.parse.unquote(api_key.strip()),"busRouteId":request["route_id"],
             "startOrd":request["startOrd"],"endOrd":request["endOrd"]})
         timestamp=datetime.now(timezone.utc).isoformat()
+        provider_code=None
         try:
-            # HTTPS only to avoid disclosing the service key through cleartext.
+            # Official provider endpoint is HTTP; never log its credential-bearing URL.
             with urllib.request.urlopen(API+"?"+params,timeout=15) as response:
                 payload=response.read(2_000_000)
             header=ET.fromstring(payload).find(".//msgHeader")
-            if header is None or header.findtext("headerCd") not in ("0","00"):
+            provider_code=header.findtext("headerCd") if header is not None else None
+            if provider_code not in ("0","00"):
                 raise ValueError("Successful provider header required")
             records.extend(normalize_xml(payload,request,timestamp,salt))
         except (OSError,ValueError,ET.ParseError) as exc:
             failures.append({"route":request["route"],"direction":request["direction"],
-                             "status":"api_error_or_missing","exception_type":type(exc).__name__})
+                             "status":"api_error_or_missing","exception_type":type(exc).__name__,
+                             "http_status":exc.code if isinstance(exc,urllib.error.HTTPError) else None,
+                             "provider_code":provider_code if provider_code and provider_code.isdigit() and len(provider_code)<=4 else None})
     with output.open("a",encoding="utf-8") as fh:
         for row in records:
             fh.write(json.dumps(row,ensure_ascii=False)+"\n")
@@ -133,7 +138,7 @@ def collect(requests,api_key,salt,output):
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--capture",action="store_true",
-                   help="Perform explicit HTTPS calls; requires environment credentials")
+                   help="Perform explicit official HTTP API calls; requires environment credentials")
     p.add_argument("--output",type=Path,help="Private JSONL output outside medical/")
     args=p.parse_args()
     data=pd.read_csv(ROOT/"results/cap5_route_pilot_candidates.csv",dtype={"route":str})

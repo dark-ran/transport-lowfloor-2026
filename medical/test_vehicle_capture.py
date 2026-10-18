@@ -34,6 +34,7 @@ class CollectorTests(unittest.TestCase):
   with tempfile.TemporaryDirectory() as td,patch('urllib.request.urlopen') as net:
    net.return_value.__enter__.return_value.read.return_value=payload
    out=Path(td)/'raw.jsonl';receipt=collect([REQ],'fixture%2Bkey%3D',SALT,out)
+   self.assertTrue(net.call_args.args[0].startswith('http://ws.bus.go.kr/api/rest/buspos/getBusPosByRouteSt?'))
    self.assertEqual(urllib.parse.parse_qs(urllib.parse.urlparse(net.call_args.args[0]).query)['serviceKey'],['fixture+key='])
    rows=[json.loads(x) for x in out.read_text(encoding='utf-8').splitlines()];public=summarize(receipt,rows,[REQ],'fixture-commit')
    self.assertEqual(public['vehicle_snapshots'],1);self.assertEqual(public['verified_boardings'],0)
