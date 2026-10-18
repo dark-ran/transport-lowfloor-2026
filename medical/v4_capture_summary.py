@@ -4,6 +4,7 @@ from datetime import datetime,timezone
 from collections import Counter
 import argparse,json
 from v4_vehicle_snapshot import ROOT
+from vehicle_observation_quality import summarize_quality
 
 def summarize(receipt,rows,requests,commit):
  failed={(x['route'],x['direction']) for x in receipt['failed_requests']}
@@ -17,7 +18,8 @@ def summarize(receipt,rows,requests,commit):
    'status':'api_error_or_missing' if (r['route'],r['direction']) in failed else ('success_with_snapshots' if selected else 'success_empty'),
    'error':{k:errors[(r['route'],r['direction'])].get(k) for k in ['exception_type','http_status','provider_code']} if (r['route'],r['direction']) in errors else None,
    'snapshots':len(selected),'distinct_vehicle_pseudonyms_in_query':len({x['vehicle_pseudonym'] for x in selected}),
-   'low_floor_snapshots':types['low_floor'],'ordinary_snapshots':types['ordinary'],'unknown_type_snapshots':types['unknown']})
+   'low_floor_snapshots':types['low_floor'],'ordinary_snapshots':types['ordinary'],'unknown_type_snapshots':types['unknown'],
+   **summarize_quality(selected)})
  return {'schema_version':1,'created_at_utc':datetime.now(timezone.utc).isoformat(),
   'source_git_commit':commit,'query_scope':receipt.get('query_scope'),
   'api_requests_executed':receipt['requests'],
