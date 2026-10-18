@@ -42,6 +42,11 @@ jobs:
           python -m unittest discover -s medical -p test_v13_evidence.py -v
           python medical/v13_position_evidence_audit.py > /tmp/v13_position_evidence_receipt.json
           python -m json.tool /tmp/v13_position_evidence_receipt.json > /dev/null
+      - name: Verify V14 against pinned original public API aggregation CSVs
+        run: |
+          python -m unittest discover -s medical -p test_v14_source_position_audit.py -v
+          python medical/v14_source_position_audit.py > /tmp/v14_source_audit.json
+          python -m json.tool /tmp/v14_source_audit.json > /dev/null
       - name: Upload versioned reproducibility outputs
         uses: actions/upload-artifact@v4
         with:
