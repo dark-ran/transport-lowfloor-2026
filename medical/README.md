@@ -168,3 +168,10 @@ route_unavailable_stress.csv는 배정된 노선 1곳의 교체가 불가능할 
 권고는 현장 집행 명령이 아닌 협의 후보: 최신 대폐차·예외사유 확인 → 병원 통행·진료시간 수요 확인 → 보행·승강장 접근성 점검 → 소규모 시범에서 실제 대기/저상 탑승/병원 도착 측정이다. 모형상 개선 동 수는 실제 수혜 인원이나 건강 결과가 아니다. 2025 기본 데이터와 2026 예외승인 목록의 시점 차이도 유지한다.
 
 실제 API 키 등록 후 GitHub 수동 수집 실행: [차량 위치 수집 안내](VEHICLE_CAPTURE.md). 기존 기본 실행은 무호출 드라이런이며 관측 성공을 뜻하지 않는다.
+
+
+## 실제 15노선 관측과 정책 검토 자동 게이트 (2026-10-18)
+
+`medical/vehicle_observation_quality.py`는 제공기관 위치 시각 `dataTm`과 실제 요청 시각의 차이를 사용해 신선(10분 이내), 오래됨, 시각불명, 비정상 미래 시간을 분리한다. `medical/observed_policy_review.py`는 GitHub의 `observations/vehicle_timeseries.csv`에 **실제로 축적된** 15노선 예약 실행 자료만 사용하며, 7개 평일·3개 이상 조사 시간대 등 최소 충분성 조건이 충족되지 않으면 기존 50대 배분표의 변경을 보류한다.
+
+자동 출력: `observations/policy_observed_evidence.csv` 및 `observations/policy_observed_review.json`. 2025년 노선 인가 보유율과 2026년 관측 차량유형 비율은 다른 분모·기준시점이며, 차이를 실제 의료접근 개선 효과로 해석하지 않는다. 기존 정적 50대 배분 모형은 변경하지 않는다. 자동 수집이 시작되지 않은 상태라면 유효 현장 관측을 임의로 생성하지 않는다. 세부 운영기준: `DETAILED_VEHICLE_CAPTURE.md`.

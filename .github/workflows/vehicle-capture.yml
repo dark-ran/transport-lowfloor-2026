@@ -33,7 +33,7 @@ jobs:
     outputs:
       ready: ${{ steps.credentials.outputs.ready }}
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Check API credential availability without failing
         id: credentials
@@ -131,7 +131,7 @@ jobs:
     needs: capture
     if: ${{ needs.capture.result == 'success' && needs.capture.outputs.ready == 'true' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     permissions:
       contents: write
     steps:
@@ -163,9 +163,15 @@ jobs:
           python medical/vehicle_window_summary.py \
             --input observations/vehicle_timeseries.csv \
             --output observations/vehicle_window_summary.csv
+          python medical/observed_policy_review.py \
+            --gates medical/results/v4_implementation_gates.csv \
+            --observations observations/vehicle_timeseries.csv \
+            --output-csv observations/policy_observed_evidence.csv \
+            --output-json observations/policy_observed_review.json
           git add observations/vehicle/ observations/vehicle_timeseries.csv \
             observations/vehicle_encrypted/ observations/vehicle_section_timeseries.csv \
-            observations/vehicle_transitions.csv observations/vehicle_window_summary.csv
+            observations/vehicle_transitions.csv observations/vehicle_window_summary.csv \
+            observations/policy_observed_evidence.csv observations/policy_observed_review.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

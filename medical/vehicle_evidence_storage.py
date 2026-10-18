@@ -106,7 +106,16 @@ def archive(enc_path,summary,output_dir,secret,run_id):
         gap=(timestamp(now)-timestamp(prior["observed_at_utc"])).total_seconds()/60
         if 0<gap<=25 and (newest is None or timestamp(prior["observed_at_utc"])>timestamp(newest[1]["observed_at_utc"])):
             newest=(p,prior)
-    prior_rows=decrypt(newest[1],secret) if newest else []
+    # Key rotation must not destroy newer evidence or fabricate matched movements.
+    # Old ciphertext remains preserved but cannot be linked under the new secret.
+    prior_rows=[]
+    if newest:
+        from cryptography.exceptions import InvalidTag
+        try:
+            prior_rows=decrypt(newest[1],secret)
+        except (InvalidTag,ValueError,zlib.error):
+            newest=None
+            print("WARNING: previous encrypted evidence could not be decrypted; movement continuity unavailable")
     rows_s=public_sections(current,run_id,now)
     rows_m=public_movements(current,prior_rows,run_id,newest[1]["run_id"] if newest else None,
                             now,newest[1]["observed_at_utc"] if newest else now)
