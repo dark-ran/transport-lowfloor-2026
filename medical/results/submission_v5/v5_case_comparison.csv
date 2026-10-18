@@ -1,0 +1,4 @@
+﻿route,dong,hospital,nominal_weekday_headway_min,original_fleet_2025,original_lowfloor_2025,theoretical_swap_in_5cap,theoretical_lowfloor_ratio_before,theoretical_lowfloor_ratio_after,model_dong_index_gain,may2026_route_boardings_all_riders,may2026_general_hospital_500m_activity_whole_route,stop_id_matched_boardings_pct,outbound_stop_intervals_archived,return_stop_intervals_archived,note
+343,대치2동,삼성서울병원,15,18,12,5,66.67,94.44,0.092593,222862,37749,100.0,3,3,2025 stops; 2026 archived directional case. GIS road/boarding not verified
+662,개봉1동,서울특별시서남병원,12,17,13,4,76.47,100.0,0.098633,215162,126251,99.9442,4,6,2025 stops; 2026 archived directional case. GIS road/boarding not verified
+3413,천호1동,강동경희대학교병원,9,26,21,5,80.77,100.0,0.128205,574339,157755,100.0,5,6,2025 stops; 2026 archived directional case. GIS road/boarding not verified
