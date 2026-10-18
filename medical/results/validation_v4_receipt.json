@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "note": "Passing offline reproducibility tests; NOT independent validation of real-world bus accessibility.",
-  "source_git_commit_environment": "e52cfa00b95e0cf178911217f0ef8b80000db1a0",
+  "source_git_commit_environment": "6c408d63b69a71d9ac261ca5437fadd424a7327d",
   "python": "3.12.15",
   "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
   "packages": {
@@ -16,6 +16,7 @@
     "current_case_stops.json": "563dc4337d7ef0081c33f63b623389f9fd2a627c8f8cf5f5eb807d171b818091",
     "exception_routes_2026.json": "f12669ba51f76cd373ef6d765f71b6265bc307bb6ad80a25ea5fa3e63bd5220d",
     "topis_case_metadata.json": "46358445dae0a4f6a63e39200fec8f729900a779cd203778132e6ac1fb8e5cc2",
+    "vehicle_candidate_route_ids.json": "42a0c52231a2b5ce3b2205a34cabfb674dcb3ad773657347ddb8048e4d651e6e",
     "고령자현황_2025Q2.csv": "a5042c9d0f2a0092c6ef0a03bc7c429f37221c36fdb32ae460099935e72b68d7",
     "노선정류소_20250513.xlsx": "72bb723f109ab977c3fb72221d2bb5a32f6b6348341ba86d82ce536da9b9237b",
     "노선정보_20261017.csv": "ff616957cb3e16443bad2b84f5be4980cfa615a5323eb4649c26f3c30e2f9074",
@@ -49,7 +50,7 @@
     "v4_directional_metadata.json": "5573cb9dcd6f1526930357d8fdd3de74d53661d4c6625213bd3b8dde90b8f5f1",
     "v4_implementation_gates.csv": "0e1dfb6732f385128fc49eda087b23d8b53f3c601ef37474e84a6ad9701ea950",
     "v4_implementation_metadata.json": "c19561d1f9587939d976228446314dfa0647b01d99980ecb9ea076ad88c8e5b8",
-    "v4_capture_manifest.json": "6fb446fc7f87f2f61445fbc1724baed53c07e08adc3ea7499267f533947230ec",
+    "v4_capture_manifest.json": "756f06575569da7c478985691f2f696d893521ff3ed4e0aa73af6c2b4b42f089",
     "v4_evidence_audit.json": "f98062c3afe5bedfe402d84805db5056a6ac76d65955dd53788ef451f5f36b67",
     "v4_decision_brief.md": "31f0fd4a6628b195489dfda93f33dc39b161801324b526cefac9fd6798820070"
   },

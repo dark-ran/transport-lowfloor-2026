@@ -1,6 +1,7 @@
 {
   "mode": "NO_CAPTURE_PERFORMED",
   "scope": "full",
+  "cohort": "pilot3",
   "requests": [
     {
       "route": "3413",
