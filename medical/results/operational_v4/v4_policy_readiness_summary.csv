@@ -1,0 +1,4 @@
+﻿policy,route_count,requested_slots,already_in_v4_15_route_evidence_scope,not_in_v4_15_route_evidence_scope,routes_with_partial_archived_directional_example,routes_with_all_six_field_gates_verified,actual_implementation_authorized_routes,actual_implementation_authorized_vehicles,decision
+screened_cap_3,22,50,14,8,4,0,0,0,HOLD_NO_FIELD_APPROVAL
+screened_cap_5,15,50,15,0,4,0,0,0,HOLD_NO_FIELD_APPROVAL
+screened_cap_7,12,50,11,1,3,0,0,0,HOLD_NO_FIELD_APPROVAL
