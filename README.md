@@ -263,3 +263,17 @@ python medical/reproduce_all.py
 
 [V11 분석 개선 보고서](medical/results/v11/v11_eval_driven_brief.md) · [23개 GIS 코호트/승차 재현 코드](medical/v11_23route_gis.py) · [23노선 검산 CSV](medical/results/v11/v11_23routes_gis_audit.csv) · [GitHub 회귀 테스트](medical/test_v11_23route_gis.py).
 
+
+
+## V12: V11 독립평가 83점의 현장 증빙 검증기 수정
+
+최신 동일 공모전 전용 V1.0 **V11 독립평가 83/100점(기술성 44/50, 공익성 39/50)**; V10 87점 대비 -4점. **V12 새 독립평가 점수는 아직 미확정**.
+
+V11 평가의 *실제 버그*는 `observation_date=not-a-date`, `vehicle_arrival_local=not-a-time`을 실제 100% 탑승 성공 기록으로 오인할 수 있었다는 것이다. V12는 날짜/시간 파싱, 노선·승강장·관측 시간대, 사전등록/조사 승인/증빙, 중복 기록을 검증하며, 설령 형식검사를 통과해도 **독립증빙 검토 전에는 성공률을 NA**로 유지한다. 실제 현장 저상차량·휠체어 관측은 0건이다. ZIP의 강화 검증 14개가 통과했고 GitHub에도 핵심 회귀 테스트를 보존했다.
+
+기존 2026년 5월 23개 노선 전체 승차 6,282,466건 중 2025 정적 59개 종합병원 **800m 직선거리** 안의 정류장 568개 노선-정류장 관계에서 발생한 승차는 2,261,763건(36.00%). 이는 정류장 ID 성공률·병원 진료자 비율·휠체어 접근성 개선이 아니다.
+
+**완전 독립 GIS 출처 확보 절차:** 배포 ZIP에 공식 월간 CSV 2개와 V11 원본 ZIP은 보존했다. GitHub `medical/data/route_stops.csv`와 `hospitals.csv` 2개 **원천 좌표 파일 자체는 ZIP에 포함되지 않았고**, [고정 커밋·Blob 해시 다운로드 코드](medical/v12_fetch_primary_gis.py) 및 ZIP `04_참고자료/acquire_pinned_gis.py`를 제공한다. 이 환경에서는 원천 파일의 새 다운로드가 되지 않았으므로 V12 재현 영수증의 `full_static_coordinate_from_pinned_original`은 **PENDING_PRIMARY_GIS_DOWNLOAD**, 월간·코호트 수치는 PASS다. 원천 확보 없이 'full GIS from source' PASS라 주장하지 않는다.
+
+실차량별 교체적격·구매·운행·차고지 정보, 실제 무장애 이동시간, 외부 전문가/이해관계자 확인은 계속 미확보이며 공식 HWP 신청서·분석보고서 제출도 **HOLD**다. 가상 50대 배분은 정책효과가 입증된 사업 집행이 아니다.
+
