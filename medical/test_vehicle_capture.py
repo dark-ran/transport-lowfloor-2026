@@ -53,6 +53,18 @@ class CollectorTests(unittest.TestCase):
    self.assertEqual(public['query_groups'][0]['query_scope'],'full')
    self.assertEqual(public['vehicle_snapshots'],1)
    self.assertNotIn('fixture-private-id',json.dumps(public))
+ def test_policy_cohort_matches_15_real_route_ids(self):
+  import pandas as pd
+  data=pd.read_csv(ROOT/'results/cap5_route_pilot_candidates.csv',dtype={'route':str})
+  requests=manifest(data,scope='full',cohort='model15')
+  self.assertEqual(len(requests),15)
+  self.assertEqual(len({r['route_id'] for r in requests}),15)
+  self.assertTrue(all(r['direction']=='route_all' for r in requests))
+  self.assertTrue(all('startOrd' not in r and 'endOrd' not in r for r in requests))
+  self.assertIn('662',{r['route'] for r in requests})
+  self.assertIn('7211',{r['route'] for r in requests})
+  with self.assertRaises(ValueError):
+   manifest(data,scope='section',cohort='model15')
  def test_missing_key_makes_no_requests(self):
   with tempfile.TemporaryDirectory() as td,patch('urllib.request.urlopen') as net:
    with self.assertRaises(ValueError):collect([REQ],None,SALT,Path(td)/'raw.jsonl')
