@@ -10,11 +10,17 @@ KST = timezone(timedelta(hours=9))
 FIELDS = (
     "route", "direction", "query_scope", "status", "snapshots",
     "low_floor_snapshots", "ordinary_snapshots", "unknown_type_snapshots",
+    "fresh_low_floor_snapshots", "fresh_ordinary_snapshots",
+    "fresh_unknown_type_snapshots", "stale_provider_snapshots",
+    "unknown_time_snapshots", "future_time_snapshots",
 )
 CSV_FIELDS = (
     "observed_at_utc", "observed_at_kst", "run_id", "run_attempt", "event",
     "query_scope", "route", "direction", "status", "snapshots",
     "low_floor_snapshots", "ordinary_snapshots", "unknown_type_snapshots",
+    "fresh_low_floor_snapshots", "fresh_ordinary_snapshots",
+    "fresh_unknown_type_snapshots", "stale_provider_snapshots",
+    "unknown_time_snapshots", "future_time_snapshots",
     "http_status", "provider_code",
 )
 
@@ -33,13 +39,26 @@ def _whitelist(source, run_id, attempt, event):
     for group in groups:
         if group.get("query_scope") != source["query_scope"]:
             raise ValueError("Group scope mismatch")
-        clean = {key: group[key] for key in FIELDS}
-        for key in ("snapshots", "low_floor_snapshots", "ordinary_snapshots", "unknown_type_snapshots"):
+        clean = {key:group.get(key,0) for key in FIELDS}
+        for key in ("snapshots", "low_floor_snapshots", "ordinary_snapshots", "unknown_type_snapshots",
+                    "fresh_low_floor_snapshots", "fresh_ordinary_snapshots", "fresh_unknown_type_snapshots",
+                    "stale_provider_snapshots", "unknown_time_snapshots", "future_time_snapshots"):
             clean[key] = int(clean[key])
             if clean[key] < 0:
                 raise ValueError("Negative observation count")
         if sum(clean[key] for key in ("low_floor_snapshots", "ordinary_snapshots", "unknown_type_snapshots")) != clean["snapshots"]:
             raise ValueError("Vehicle type counts do not sum to observations")
+        available_qc = any(key in group for key in (
+            "fresh_low_floor_snapshots","stale_provider_snapshots","unknown_time_snapshots"))
+        if available_qc:
+            quality_keys=("fresh_low_floor_snapshots","fresh_ordinary_snapshots",
+                          "fresh_unknown_type_snapshots","stale_provider_snapshots",
+                          "unknown_time_snapshots","future_time_snapshots")
+            if sum(clean[key] for key in quality_keys)!=clean["snapshots"]:
+                raise ValueError("Fresh/stale/missing timestamp counts do not match snapshots")
+        else:
+            # Old runs predate provider timestamp quality accounting. Do not count as fresh.
+            clean["unknown_time_snapshots"]=clean["snapshots"]
         err = group.get("error") or {}
         clean["http_status"] = err.get("http_status")
         clean["provider_code"] = err.get("provider_code")
