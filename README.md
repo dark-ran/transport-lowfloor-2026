@@ -200,3 +200,15 @@ python medical/reproduce_all.py
 - [V4 24개 적격성 시나리오](medical/results/operational_v4/v4_historical_eligibility_stress.csv)
 - [V4 오프라인 재현 코드](medical/v4_feasibility.py) · [테스트](medical/test_v4_feasibility.py)
 
+
+
+## V5: 의료 접근 대표 3개 노선과 제출 보고서
+
+사용자가 전달한 독립평가의 **V4 87/100점**을 기준으로 보고서의 사례 설명·실행 규칙·지리자료 연결 품질을 개선했다. 기존에 따로 제시됐던 90점 자체평가와는 심사 기준이 달라 점수를 합치지 않는다. V5는 아직 독립평가받지 않았다.
+
+- **3개 대표 의료 접근 사례:** 343번(대치2동–삼성서울병원), 662번(개봉1동–서남병원), 3413번(천호1동–강동경희대학교병원). 2025년 정류장·차량구성, 2026년 일반 공시 배차, 일부 병원행·귀가행 정적 정류장 순서 및 2026년 5월 교통카드 수요를 시점별로 구분했다.
+- **연결률 오해 정정:** 독립평가에 제시된 1124번 8.77%는 전체 지리정보 연결률이 아니다. 2026년 5월 승차 기록을 2025년 **동일 노선의 정류장 ID 전체**에 매칭한 비율은 343 **100.0%**, 662 **99.94%**, 1124 **99.42%**, 3413 **100.0%**다. 그렇다고 순번·병원 접근성·저상차량 탑승 효과까지 검증된 것은 아니다.
+- **목표별 조건부 선택:** 광범위한 지역 개선과 전체 승차 수요면 3대 상한; 정적 의료연결 및 종합병원 500m 인접 승하차 활동량이면 7대 상한; 지수 0.05 이상 개선 동의 수를 중시하면 5대 상한. 실제 집행 적격성 **승인 0대**는 변함없다.
+- **제출 문서:** 근거표·사례 좌표 그림을 수록한 7페이지 DOCX/PDF 편집 초안 작성. 공식 [숲과나눔 모집 공지](https://koreashe.org/notice/?mod=document&uid=95427)의 HWP 참가신청서·분석보고서 별도 양식을 대체하지 않음.
+
+관련 파일: [V5 정책·대표사례 분석요약](medical/results/submission_v5/v5_submission_brief.md) · [V5 정류장 ID 원자료 재현 코드](medical/v5_temporal_linkage.py) · [V5 검산 CSV](medical/results/submission_v5/v5_temporal_linkage_audit.csv) · [V5 노선 사례 표](medical/results/submission_v5/v5_case_comparison.csv).
