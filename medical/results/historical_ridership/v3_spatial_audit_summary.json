@@ -1,0 +1,59 @@
+{
+  "version": "V3",
+  "status": "LOCAL_INDEPENDENT_CROSSCHECK_PASS_WITH_ROUNDED_SPATIAL_CROSSWALK",
+  "dates": "2025-05 versus 2026-05",
+  "selected_policy_count": 3,
+  "policy_cohort_union_routes": 23,
+  "baseline_boardings_may_2025": 6037402,
+  "comparison_boardings_may_2026": 6282466,
+  "general_hospitals_with_approval_by_2025_05_31": 59,
+  "unique_static_stop_ids_for_23_routes": 1414,
+  "within_general_hospital_straight_line_meters": {
+    "300": 105,
+    "500": 250,
+    "800": 494
+  },
+  "may_2026_500m_boardings_plus_alightings": 2493105,
+  "may_2026_keyword_hospital_stop_activity": 905108,
+  "ranking_loo": {
+    "general_boardings": {
+      "screened_cap_3": 16,
+      "screened_cap_5": 6,
+      "screened_cap_7": 1
+    },
+    "general_hospital_500m": {
+      "screened_cap_3": 1,
+      "screened_cap_5": 1,
+      "screened_cap_7": 21
+    }
+  },
+  "weight_grid": {
+    "objectives": [
+      "original_static_medical_gain",
+      "improved_dongs",
+      "whole_route_boardings",
+      "500m_general_hospital_stop_activity"
+    ],
+    "step": 0.1,
+    "scenarios": 286,
+    "wins": {
+      "screened_cap_3": 164,
+      "screened_cap_5": 21,
+      "screened_cap_7": 101
+    },
+    "caveat": "Not estimated stakeholder preferences, not evidence of policy success probability"
+  },
+  "input_sha256": {
+    "2025_may_csv": "7c78d229f4f6c92e6ce059a050bf0cd3f2fa2a73e41a4cc6df1cfa4f878824f8",
+    "2026_may_csv": "071eca2a6a1f5e306a78b3b945c7b62fdaeb1dd6c8ad7647f92f0ca803c665dc"
+  },
+  "check": "2025 location inventory was used to cross-check route-stop incidence and hospital proximity, distances rounded to 0.1m; source code can recompute exact haversine distances on locally downloaded original May CSVs",
+  "full_csv_in_repo": false,
+  "limitations": [
+    "Hospital proximity uses geodesic distance, not walkable routes",
+    "2026 license register retrospectively filtered by 2025 approval date",
+    "2025 and 2026 source reference dates differ",
+    "No low-floor boarding or patient medical journey outcomes",
+    "No actual fleet replacement feasibility approval"
+  ]
+}
