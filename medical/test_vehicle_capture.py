@@ -5,7 +5,7 @@ import v4_vehicle_snapshot as collector
 from pathlib import Path
 from unittest.mock import patch,MagicMock
 import urllib.parse
-from v4_vehicle_snapshot import ROOT,collect
+from v4_vehicle_snapshot import ROOT,collect,manifest
 from v4_capture_summary import summarize
 REQ={'route':'343','route_id':'107000002','direction':'outbound','boarding_seq':7,'startOrd':6,'endOrd':8}
 SALT='fixture-local-salt-1234'
@@ -15,7 +15,44 @@ class CollectorTests(unittest.TestCase):
    root=Path(td);(root/'results').mkdir();shutil.copy2(ROOT/'results/cap5_route_pilot_candidates.csv',root/'results/cap5_route_pilot_candidates.csv')
    output=io.StringIO()
    with patch.object(collector,'ROOT',root),patch('sys.argv',['collector']),redirect_stdout(output):collector.main()
-   self.assertEqual(json.loads(output.getvalue())['queries_executed'],0);net.assert_not_called()
+   result=json.loads(output.getvalue())
+   self.assertEqual(result['queries_executed'],0)
+   self.assertEqual(result['scope'],'full')
+   self.assertEqual(len(result['requests']),3)
+   self.assertTrue(all(r['direction']=='route_all' and 'startOrd' not in r and 'endOrd' not in r for r in result['requests']))
+   net.assert_not_called()
+ def test_section_scope_remains_available_in_dry_run(self):
+  with tempfile.TemporaryDirectory() as td,patch('urllib.request.urlopen') as net:
+   root=Path(td);(root/'results').mkdir();shutil.copy2(ROOT/'results/cap5_route_pilot_candidates.csv',root/'results/cap5_route_pilot_candidates.csv')
+   output=io.StringIO()
+   with patch.object(collector,'ROOT',root),patch('sys.argv',['collector','--scope','section']),redirect_stdout(output):collector.main()
+   result=json.loads(output.getvalue())
+   self.assertEqual(result['scope'],'section')
+   self.assertEqual(len(result['requests']),6)
+   self.assertTrue(all('startOrd' in r and 'endOrd' in r for r in result['requests']))
+   net.assert_not_called()
+ def test_full_route_uses_official_endpoint_and_no_section_params(self):
+  req={'route':'343','route_id':'107000002','scope':'full','direction':'route_all'}
+  payload=b'<ServiceResult><msgHeader><headerCd>0</headerCd></msgHeader><msgBody><itemList><vehId>fixture-private-id</vehId><busType>1</busType><sectOrd>11</sectOrd></itemList></msgBody></ServiceResult>'
+  with tempfile.TemporaryDirectory() as td,patch('urllib.request.urlopen') as net:
+   net.return_value.__enter__.return_value.read.return_value=payload
+   output=Path(td)/'raw.jsonl'
+   receipt=collect([req],'fixture-key',SALT,output)
+   url=urllib.parse.urlparse(net.call_args.args[0])
+   self.assertEqual(url.path,'/api/rest/buspos/getBusPosByRtid')
+   params=urllib.parse.parse_qs(url.query)
+   self.assertEqual(params['busRouteId'],['107000002'])
+   self.assertNotIn('startOrd',params)
+   self.assertNotIn('endOrd',params)
+   self.assertEqual(receipt['request_manifest'],[req])
+   rows=[json.loads(x) for x in output.read_text(encoding='utf-8').splitlines()]
+   self.assertEqual(rows[0]['direction'],'route_all')
+   self.assertIsNone(rows[0]['boarding_seq'])
+   public=summarize(receipt,rows,receipt['request_manifest'],'fixture-commit')
+   self.assertEqual(public['query_scope'],'full')
+   self.assertEqual(public['query_groups'][0]['query_scope'],'full')
+   self.assertEqual(public['vehicle_snapshots'],1)
+   self.assertNotIn('fixture-private-id',json.dumps(public))
  def test_missing_key_makes_no_requests(self):
   with tempfile.TemporaryDirectory() as td,patch('urllib.request.urlopen') as net:
    with self.assertRaises(ValueError):collect([REQ],None,SALT,Path(td)/'raw.jsonl')

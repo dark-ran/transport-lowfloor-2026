@@ -1,6 +1,15 @@
 name: Manual real bus snapshot
 on:
   workflow_dispatch:
+    inputs:
+      scope:
+        description: "Whole route (default) or optional direction-specific stop windows"
+        type: choice
+        required: true
+        default: full
+        options:
+          - full
+          - section
 
 permissions:
   contents: read
@@ -52,12 +61,13 @@ jobs:
           with open(os.environ['GITHUB_ENV'],'a') as f:
               f.write('V4_VEHICLE_SALT='+salt+'\n')
           PY
-      - name: Capture six explicit route-direction snapshots
+      - name: Capture selected full-route or section snapshots
         if: steps.credentials.outputs.ready == 'true'
         env:
           SEOUL_BUS_API_KEY: ${{ secrets.SEOUL_BUS_API_KEY }}
+          CAPTURE_SCOPE: ${{ inputs.scope }}
         run: |
-          python medical/v4_vehicle_snapshot.py --capture --output "$RUNNER_TEMP/vehicle_observations.jsonl" > "$RUNNER_TEMP/capture_receipt.json"
+          python medical/v4_vehicle_snapshot.py --scope "$CAPTURE_SCOPE" --capture --output "$RUNNER_TEMP/vehicle_observations.jsonl" > "$RUNNER_TEMP/capture_receipt.json"
           python medical/v4_capture_summary.py --receipt "$RUNNER_TEMP/capture_receipt.json" --private-jsonl "$RUNNER_TEMP/vehicle_observations.jsonl" --output "$RUNNER_TEMP/public/vehicle_capture_summary.json" --commit "$GITHUB_SHA"
       - name: Report provider availability without treating absent evidence as failure
         if: steps.credentials.outputs.ready == 'true'
@@ -80,6 +90,7 @@ jobs:
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
               f.write('### Vehicle-position API evidence status\n\n')
               f.write(f'- Status: **{status}**\n')
+              f.write(f'- Query scope: **{receipt.get("query_scope")}**\n')
               f.write(f'- Attempted requests: **{requested}**; provider-successful: **{successful}**; snapshots: **{snapshots}**\n')
               f.write('- These snapshots do not confirm arrivals, boarding or actual low-floor vehicle headways.\n')
               f.write('- No private vehicle identifiers, pseudonyms or API secrets are published.\n')
