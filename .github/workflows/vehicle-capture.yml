@@ -160,9 +160,12 @@ jobs:
             --summary "$RUNNER_TEMP/aggregate/vehicle_capture_summary.json" \
             --directory observations/vehicle_encrypted \
             --run-id "$GITHUB_RUN_ID"
+          python medical/vehicle_window_summary.py \
+            --input observations/vehicle_timeseries.csv \
+            --output observations/vehicle_window_summary.csv
           git add observations/vehicle/ observations/vehicle_timeseries.csv \
             observations/vehicle_encrypted/ observations/vehicle_section_timeseries.csv \
-            observations/vehicle_transitions.csv
+            observations/vehicle_transitions.csv observations/vehicle_window_summary.csv
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
