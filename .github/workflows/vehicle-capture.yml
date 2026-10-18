@@ -1,5 +1,11 @@
 name: Scheduled 15-route vehicle evidence
 on:
+  # Also launch once when this workflow definition is changed on main.
+  # The archive commits only observations/, so this does not recursively launch.
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/vehicle-capture.yml'
   # UTC schedules: six 5-minute observations per 30-minute KST window.
   # GitHub scheduling is best-effort; runs may start late or be skipped.
   schedule:
