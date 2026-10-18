@@ -1,5 +1,13 @@
-name: Manual real bus snapshot
+name: Scheduled real bus snapshot
 on:
+  # UTC times; KST = UTC+09:00. GitHub schedule start may be delayed.
+  schedule:
+    - cron: '0 23 * * 0-4'  # Mon-Fri 08:00 KST (previous UTC day)
+    - cron: '0 1 * * 1-5'   # Mon-Fri 10:00 KST
+    - cron: '0 5 * * 1-5'   # Mon-Fri 14:00 KST
+    - cron: '0 8 * * 1-5'   # Mon-Fri 17:00 KST
+    - cron: '0 1 * * 0,6'   # Sat/Sun 10:00 KST
+    - cron: '0 7 * * 0,6'   # Sat/Sun 16:00 KST
   workflow_dispatch:
     inputs:
       scope:
@@ -14,9 +22,15 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: bus-position-snapshots-main
+  cancel-in-progress: false
+
 jobs:
   capture:
     name: Optional bus snapshot (credentials required)
+    outputs:
+      ready: ${{ steps.credentials.outputs.ready }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -65,7 +79,7 @@ jobs:
         if: steps.credentials.outputs.ready == 'true'
         env:
           SEOUL_BUS_API_KEY: ${{ secrets.SEOUL_BUS_API_KEY }}
-          CAPTURE_SCOPE: ${{ inputs.scope }}
+          CAPTURE_SCOPE: ${{ inputs.scope || 'full' }}
         run: |
           python medical/v4_vehicle_snapshot.py --scope "$CAPTURE_SCOPE" --capture --output "$RUNNER_TEMP/vehicle_observations.jsonl" > "$RUNNER_TEMP/capture_receipt.json"
           python medical/v4_capture_summary.py --receipt "$RUNNER_TEMP/capture_receipt.json" --private-jsonl "$RUNNER_TEMP/vehicle_observations.jsonl" --output "$RUNNER_TEMP/public/vehicle_capture_summary.json" --commit "$GITHUB_SHA"
@@ -103,3 +117,36 @@ jobs:
           path: ${{ runner.temp }}/public/vehicle_capture_summary.json
           if-no-files-found: error
           retention-days: 30
+
+  archive_public_aggregate:
+    name: Commit pseudonym-free longitudinal observations
+    needs: capture
+    if: ${{ needs.capture.result == 'success' && needs.capture.outputs.ready == 'true' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: bus-vehicle-aggregate-${{ github.run_id }}
+          path: "${{ runner.temp }}/aggregate"
+      - name: Save whitelisted route-level counts and update trend CSV
+        run: |
+          python medical/archive_vehicle_aggregate.py \
+            --input "$RUNNER_TEMP/aggregate/vehicle_capture_summary.json" \
+            --output-dir observations/vehicle \
+            --run-id "$GITHUB_RUN_ID" \
+            --attempt "$GITHUB_RUN_ATTEMPT" \
+            --event "$GITHUB_EVENT_NAME"
+          git add observations/vehicle/ observations/vehicle_timeseries.csv
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "observations: archive vehicle-type counts for run $GITHUB_RUN_ID"
+            git push origin HEAD:main
+          fi
