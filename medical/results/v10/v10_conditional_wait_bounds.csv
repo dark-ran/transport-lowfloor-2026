@@ -1,0 +1,4 @@
+route,h_min,slots_N,lowfloor_L,added_slots,post_L,baseline_min_avg_wait_min,baseline_max_avg_wait_min,post_min_avg_wait_min,post_max_avg_wait_min,change_min_lower_bound,change_min_upper_bound,evidence
+343,15,18,12,5,17,12.500000,25.000000,8.333333,8.333333,4.166667,16.666667,IDEALIZED_NOT_MEASURED
+662,12,17,13,4,17,8.823529,13.058824,6.000000,6.000000,2.823529,7.058824,IDEALIZED_NOT_MEASURED
+3413,9,26,21,5,26,6.230769,9.692308,4.500000,4.500000,1.730769,5.192308,IDEALIZED_NOT_MEASURED
