@@ -179,3 +179,24 @@ python medical/reproduce_all.py
 - [실제 좌표를 다시 계산하는 오프라인 Python 코드](medical/historical_policy_spatial_v3.py)
 - [순수함수 단위 테스트](medical/test_historical_policy_spatial_v3.py)
 
+
+
+## V4: 교체 물량의 실제 집행 가능성을 분리한 조건부 평가
+
+세 정책의 50대는 **가상 교체 슬롯**이다. 이전 V3의 2025년 차량 구성·2026년 수요를 실제 교체 승인 근거로 오인하지 않도록 기존 V4의 15개 노선별 실행 점검표를 **3·5·7대 정책의 합집합 23개 노선**으로 확장한 감사를 작성했다.
+
+| 항목 | 3대 | 5대 | 7대 |
+|---|---:|---:|---:|
+| 정책 노선 | 22 | 15 | 12 |
+| 기존 실행 점검표 범위 내 노선 | 14 | 15 | 11 |
+| **추가 근거 확보가 필요한 노선** | **8** | 0 | 1 |
+| 실집행 승인 차량 | **0** | **0** | **0** |
+| 2025 고상버스 중 50%만 적격하다는 임의 가정에서 원배분 유지량(노선별 내림) | 31/50 | 22/50 | 23/50 |
+
+**현장 GO는 세 정책 모두 보류**: 실제 차량별 차령·대폐차 적격, 운수사 배차/차고지, 정류장~병원 무장애 보행, 차량 비용 및 실측 교통약자 편익이 미확인이다. 위 물량은 **가정 민감도**로서 실제 교체 가능 차량 대수가 아니다. 특히 7대 상한안의 2312번은 7대가 배분되지만 기존 15개 노선 점검표 밖에 있다.
+
+- [V4 실행 조건 및 정책 판단 보고서](medical/results/operational_v4/v4_decision_brief.md)
+- [V4 23개 노선 근거 장부](medical/results/operational_v4/v4_route_gate_ledger.csv)
+- [V4 24개 적격성 시나리오](medical/results/operational_v4/v4_historical_eligibility_stress.csv)
+- [V4 오프라인 재현 코드](medical/v4_feasibility.py) · [테스트](medical/test_v4_feasibility.py)
+
