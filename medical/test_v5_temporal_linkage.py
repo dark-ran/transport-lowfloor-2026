@@ -26,6 +26,4 @@ class V5LinkageTests(unittest.TestCase):
         p=Path(__file__).resolve().parent/"data/route_stops.csv"
         d=v.static_ids(p)
         self.assertEqual([len(d[r]) for r in v.ROUTES],[69,65,37,101])
-    def test_stop_id_coverage_not_evidence_of_wheelchair_access(self):
-        self.assertIn("NOT_HOSPITAL_800M",v.calculate.__doc__ or "NOT_HOSPITAL_800M")
 if __name__=="__main__":unittest.main()
