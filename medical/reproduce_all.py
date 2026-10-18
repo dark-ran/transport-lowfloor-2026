@@ -37,7 +37,9 @@ STAGES = [
     "v4_vehicle_snapshot.py",
     "v4_evidence_audit.py",
     "v4_decision_brief.py",
-    "v3_policy_brief.py"
+    "v3_policy_brief.py",
+    "v5_case_maps.py",
+    "v6_evidence_audit.py"
 ]
 
 
