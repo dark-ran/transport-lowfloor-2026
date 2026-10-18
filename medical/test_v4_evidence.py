@@ -71,9 +71,15 @@ class V4EvidenceTests(unittest.TestCase):
             "outbound_leg":'{"board":"A","board_seq":15}',
             "return_leg":'{"board":"B","board_seq":75}'
         }
-        r=manifest(pd.DataFrame([entry]))
-        self.assertEqual(len(r),2)
-        self.assertEqual({z["direction"] for z in r},{"outbound","return"})
+        data=pd.DataFrame([entry])
+        whole=manifest(data)
+        self.assertEqual(len(whole),1)
+        self.assertEqual(whole[0]["direction"],"route_all")
+        self.assertNotIn("startOrd",whole[0])
+        self.assertNotIn("endOrd",whole[0])
+        section=manifest(data,scope="section")
+        self.assertEqual(len(section),2)
+        self.assertEqual({z["direction"] for z in section},{"outbound","return"})
 
 
 if __name__=="__main__":
