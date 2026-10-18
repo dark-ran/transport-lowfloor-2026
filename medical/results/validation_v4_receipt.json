@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "note": "Passing offline reproducibility tests; NOT independent validation of real-world bus accessibility.",
-  "source_git_commit_environment": "c93b9cf04aae023d9b2b9a9b4c1dc6af90f26b52",
+  "source_git_commit_environment": "79fbc50d28ef2346e27c60a226fa61b3a1c401df",
   "python": "3.12.15",
   "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
   "packages": {
