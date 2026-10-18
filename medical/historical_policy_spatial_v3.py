@@ -68,12 +68,15 @@ def observed_near_stops(may26,universe,near,route_stops):
     cols_b=[f"{h:02d}시승차총승객수" if h==0 else f"{h}시승차총승객수" for h in range(24)]
     cols_a=[f"{h:02d}시하차총승객수" if h==0 else f"{h}시하차총승객수" for h in range(24)]
     route={r:{radius:dict(activity=0,mid_activity=0) for radius in RADII} for r in universe}
-    match=defaultdict(int);hospital_activity=Counter()
+    match=defaultdict(int);hospital_activity=Counter();named_activity=defaultdict(int)
     for x in csv_records(may26,"cp949"):
         if x["사용년월"]!="202605":raise ValueError("Only 2026 May is valid")
         r=x["노선번호"].strip();sid=x["표준버스정류장ID"].strip()
-        if r not in universe or sid not in route_stops.get(r,set()) or sid not in near:continue
+        if r not in universe:continue
         b=[int(x[k]) for k in cols_b];a=[int(x[k]) for k in cols_a]
+        if "병원" in x["역명"] and "동물병원" not in x["역명"]:
+            named_activity[r]+=sum(b)+sum(a)
+        if sid not in route_stops.get(r,set()) or sid not in near:continue
         if min(b+a)<0:raise ValueError("Negative count")
         match[r]+=sum(b)
         dist,hname=near[sid]
@@ -82,15 +85,15 @@ def observed_near_stops(may26,universe,near,route_stops):
                 route[r][radius]["activity"]+=sum(b)+sum(a)
                 route[r][radius]["mid_activity"]+=sum(b[10:17])+sum(a[10:17])
         if dist<=500:hospital_activity[hname]+=sum(b)+sum(a)
-    return route,dict(match),hospital_activity
+    return route,dict(match),hospital_activity,dict(named_activity)
 
 
-def compare(policies,older,newer,geo):
+def compare(policies,older,newer,geo,named_activity):
     universe=set().union(*(x.keys() for x in policies.values()))
     funcs={
         "all_board":lambda r:newer[r]["boarding"],
         "mid_board":lambda r:newer[r]["midday"],
-        "hospital_name_activity":lambda r:newer[r]["hosp"],
+        "hospital_name_activity":lambda r:named_activity.get(r,0),
     }
     for radius in RADII:
         funcs[f"hospital_{radius}m_activity"]=lambda r,radius=radius:geo[r][radius]["activity"]
@@ -170,8 +173,8 @@ def main():
     older=previous.extract(args.may_2025,2025,universe)
     newer=previous.extract(args.may_2026,2026,universe)
     near,routes,geo_audit=proximity(args.route_stops,args.hospitals,universe)
-    spatial,matched,hospital_activity=observed_near_stops(args.may_2026,universe,near,routes)
-    summaries,loo=compare(policies,older,newer,spatial)
+    spatial,matched,hospital_activity,named=observed_near_stops(args.may_2026,universe,near,routes)
+    summaries,loo=compare(policies,older,newer,spatial,named)
     equity={x["policy"]:{"base_delta_index":float(x["base_delta_index"]),"changed_dongs":int(x["changed_dongs"])}
             for x in csv_records(args.equity) if x["policy"] in POLICIES}
     grid,weight_meta=weight_screen(summaries,equity)
@@ -183,7 +186,7 @@ def main():
     for route in sorted(universe,key=int):
         x={"route":route,"boardings_2025":older[route]["boarding"],
            "boardings_2026":newer[route]["boarding"],"boardings_geolinked_2026":matched.get(route,0),
-           "hospital_name_activity":newer[route]["hosp"]}
+           "hospital_name_activity":named.get(route,0)}
         for radius in RADII:
             x[f"general_hospital_{radius}m_activity"]=spatial[route][radius]["activity"]
         route_rows.append(x)
