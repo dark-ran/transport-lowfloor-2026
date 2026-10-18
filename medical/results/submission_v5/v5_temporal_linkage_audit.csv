@@ -1,0 +1,5 @@
+﻿route,monthly_boardings_2026,boardings_matching_2025_static_stop_id,share_matching_pct,nonmatching_boardings,static_2025_stop_id_count,interpretation
+343,222862,222862,100.0,0,69,"same-route stop-ID linkage, NOT 800m-hospital activity share"
+662,215162,215042,99.9442,120,65,"same-route stop-ID linkage, NOT 800m-hospital activity share"
+1124,55579,55259,99.4242,320,37,"same-route stop-ID linkage, NOT 800m-hospital activity share"
+3413,574339,574339,100.0,0,101,"same-route stop-ID linkage, NOT 800m-hospital activity share"
