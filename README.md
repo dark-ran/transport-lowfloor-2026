@@ -290,3 +290,15 @@ V11 평가의 *실제 버그*는 `observation_date=not-a-date`, `vehicle_arrival
 
 [V13 평가 반영 내역과 한계](medical/results/v13/v13_eval_driven_brief.md) · [실제 API 관측 재집계 코드](medical/v13_position_evidence_audit.py) · [자료 입력계약](medical/v13_field_registry_audit.py).
 
+
+
+## V14: V13 85점 평가의 원천자료 재현 결함 수정
+
+최신 독립평가는 **V13 85/100점(기술성 45/50, 공익성 40/50)**이며 V12와 동점이다. V13의 주 ZIP은 30개 관측값을 Python 코드의 ARCHIVE 사전에 하드코딩하였기 때문에 **원자료부터의 재현성 T4 4/5**로 감점되었다.
+
+**V14 변경:** [GitHub 원본 관측 CSV 두 개](observations/vehicle_timeseries.csv)의 고정 Git Blob SHA를 확인하고, [원본 재집계 코드](medical/v14_source_position_audit.py)에서 이 CSV와 [30행 시간대 요약](observations/vehicle_window_summary.csv)을 직접 파싱·30:30 대조한다. [관련 테스트](medical/test_v14_source_position_audit.py)는 CI에서 실행한다. V14 배포 ZIP에는 원본과 바이트가 동일한 두 CSV와 V13 ZIP, V13 독립평가 TXT, 원천 감사 코드·8개 회귀시험·검증 영수증, 4쪽 DOCX/PDF를 포함한다.
+
+**새로 검산된 실제 기록:** 2026-10-18 일요일 15개 노선의 두 시점, **30회 조회·262건 위치/유형 스냅샷(저상 236·일반 26, 지연응답 2)**. 평일 관측 **0일**, 23개 노선 중 미관측 **8개**, 자체 3회 이상 조회 창 **0개**. 차량 위치 스냅샷은 실제 정류장 도착·휠체어 탑승·병원 출입구 접근 시간도, 고유 차량 대수도 아니다. 현재 **정책 효과/실제 대폐차 승인/공식 제출 증빙은 HOLD**다. V14 신규 독립평가 점수는 아직 부여하지 않았다.
+
+[V14 감점 해결 범위와 한계](medical/results/v14/v14_eval_driven_brief.md).
+
