@@ -1,0 +1,28 @@
+{
+  "version": "V4",
+  "status": "NO_CURRENT_VEHICLE_APPROVAL",
+  "route_universe": 23,
+  "allocation_rows": 49,
+  "previous_gate_scope": 15,
+  "six_field_gates": [
+    "vehicle_decommission_eligibility",
+    "actual_lowfloor_departures",
+    "depot_charging_clearance",
+    "accessible_origin_stop_hospital_path",
+    "actual_unit_and_lifecycle_cost",
+    "real_patient_boarding_benefit"
+  ],
+  "source_paths": [
+    "medical/results/cap_allocations.csv",
+    "medical/results/v4_implementation_gates.csv",
+    "medical/results/historical_ridership/v3_route_spatial_evidence.csv"
+  ],
+  "notes": [
+    "The source V4 gates are all unverified; other eight routes are NOT_ASSESSED, not proven infeasible.",
+    "All scenarios use 2025 nominal high-floor counts; they are not real replacement plans.",
+    "Each policy has exactly 50 hypothetical vehicle slots.",
+    "Route capacities are rounded floor/ceil per route. No reallocations.",
+    "Six operational gate approvals, real patient travel and current budgets remain unverified."
+  ],
+  "model_implementation_status": "HOLD_ALL"
+}
