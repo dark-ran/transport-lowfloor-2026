@@ -30,16 +30,33 @@ API_BY_SCOPE={
     "section":"http://ws.bus.go.kr/api/rest/buspos/getBusPosByRouteSt",
 }
 ROUTES=("662","343","3413")
+ROUTE_MAP_FILE=ROOT/"raw/vehicle_candidate_route_ids.json"
 
 
 def _leg(s):
     return json.loads(s) if isinstance(s,str) and s.strip() else {}
 
 
-def manifest(data,scope="full"):
+def manifest(data,scope="full",cohort="pilot3"):
     """One full-route request per route by default; section windows are optional."""
     if scope not in API_BY_SCOPE:
         raise ValueError("Unknown capture scope")
+    if cohort=="model15":
+        if scope!="full":
+            raise ValueError("model15 supports whole-route snapshots only")
+        mapping=json.loads(ROUTE_MAP_FILE.read_text(encoding="utf-8"))["route_ids"]
+        gates=pd.read_csv(ROOT/"results/v4_implementation_gates.csv",dtype={"route":str})
+        chosen=sorted(gates.route.astype(str).unique().tolist())
+        if len(chosen)!=15 or set(chosen)!=set(mapping):
+            raise ValueError("Exactly 15 model-allocated routes must match official route ID map")
+        if len(set(mapping.values()))!=15 or not all(len(x)==9 and x.isdigit() for x in mapping.values()):
+            raise ValueError("Invalid or duplicate official route IDs")
+        return [{"route":r,"route_id":mapping[r],"scope":"full",
+                 "direction":"route_all",
+                 "purpose":"time-stamped whole-route type and position snapshot"}
+                for r in chosen]
+    if cohort!="pilot3":
+        raise ValueError("Unknown capture cohort")
     data=data[(data.route.isin(ROUTES)) & (data.both_directions == True)].copy()
     data=data.sort_values(["route","base_dong_index_gain"],ascending=[True,False])
     data=data.drop_duplicates("route")
@@ -61,6 +78,16 @@ def manifest(data,scope="full"):
                 "startOrd":max(1,board-1),"endOrd":board+1,
                 "purpose":"narrow section snapshot; NOT proof of boarding/arrival"})
     return requests
+
+def _valid_coordinate(value, lower, upper):
+    try:
+        number=float(value)
+        if not (lower<=number<=upper):
+            return None
+        return round(number,7)
+    except (TypeError,ValueError,OverflowError):
+        return None
+
 
 def normalize_xml(payload,request,observed_at,salt):
     root=ET.fromstring(payload)
@@ -94,6 +121,12 @@ def normalize_xml(payload,request,observed_at,salt):
             "provider_observation_time":item.findtext("dataTm"),
             "vehicle_type":label,
             "reported_stop_flag":item.findtext("stopFlag"),
+            "longitude":_valid_coordinate(item.findtext("gpsX") or item.findtext("tmX"),124,132),
+            "latitude":_valid_coordinate(item.findtext("gpsY") or item.findtext("tmY"),33,40),
+            "route_distance":item.findtext("rtDist"),
+            "section_distance":item.findtext("sectDist"),
+            "reported_running_flag":item.findtext("isrunyn"),
+            "next_station_id":item.findtext("nextStId"),
             "vehicle_pseudonym":pseudonym,
             "evidence_level":"vehicle_position_snapshot_only",
             "confirmed_at_boarding_stop":False,
@@ -154,18 +187,20 @@ def main():
     p.add_argument("--capture",action="store_true",
                    help="Perform explicit official HTTP API calls; requires environment credentials")
     p.add_argument("--output",type=Path,help="Private JSONL output outside medical/")
+    p.add_argument("--cohort",choices=("pilot3","model15"),default="pilot3",
+                   help="pilot3 default for offline compatibility; model15 for automated full-route monitoring")
     p.add_argument("--scope",choices=("full","section"),default="full",
                    help="full: entire routes (default); section: narrow outbound/return stop windows")
     args=p.parse_args()
     data=pd.read_csv(ROOT/"results/cap5_route_pilot_candidates.csv",dtype={"route":str})
-    requests=manifest(data,scope=args.scope)
+    requests=manifest(data,scope=args.scope,cohort=args.cohort)
     if not args.capture:
         (ROOT/"results/v4_capture_manifest.json").write_text(
-            json.dumps({"mode":"NO_CAPTURE_PERFORMED","scope":args.scope,
+            json.dumps({"mode":"NO_CAPTURE_PERFORMED","scope":args.scope,"cohort":args.cohort,
                         "requests":requests,
                         "real_vehicle_observations":0,
                         "no_credentials_embedded":True},ensure_ascii=False,indent=2),encoding="utf-8")
-        print(json.dumps({"mode":"DRY_RUN_NO_CALLS","scope":args.scope,
+        print(json.dumps({"mode":"DRY_RUN_NO_CALLS","scope":args.scope,"cohort":args.cohort,
                           "requests":[{k:v for k,v in r.items() if k!="purpose"} for r in requests],
                           "queries_executed":0,
                           "real_vehicle_observations":0},ensure_ascii=False,indent=2))
