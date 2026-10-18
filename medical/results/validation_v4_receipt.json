@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "note": "Passing offline reproducibility tests; NOT independent validation of real-world bus accessibility.",
-  "source_git_commit_environment": "1c9c2b04887c6941f52738c77124be30be41de0b",
+  "source_git_commit_environment": "df912cc25da7c800ac4c338daba4ab495c6cf5b3",
   "python": "3.12.15",
   "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
   "packages": {
@@ -49,7 +49,7 @@
     "v4_directional_metadata.json": "5573cb9dcd6f1526930357d8fdd3de74d53661d4c6625213bd3b8dde90b8f5f1",
     "v4_implementation_gates.csv": "0e1dfb6732f385128fc49eda087b23d8b53f3c601ef37474e84a6ad9701ea950",
     "v4_implementation_metadata.json": "c19561d1f9587939d976228446314dfa0647b01d99980ecb9ea076ad88c8e5b8",
-    "v4_capture_manifest.json": "d24562c2ab85e8a285833ca76271594030068edf85a8687381678836f51ce6b8",
+    "v4_capture_manifest.json": "6fb446fc7f87f2f61445fbc1724baed53c07e08adc3ea7499267f533947230ec",
     "v4_evidence_audit.json": "f98062c3afe5bedfe402d84805db5056a6ac76d65955dd53788ef451f5f36b67",
     "v4_decision_brief.md": "31f0fd4a6628b195489dfda93f33dc39b161801324b526cefac9fd6798820070"
   },
