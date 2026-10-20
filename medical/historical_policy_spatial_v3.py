@@ -67,7 +67,7 @@ def proximity(stop_file,hospital_file,universe):
 def observed_near_stops(may26,universe,near,route_stops):
     cols_b=[f"{h:02d}시승차총승객수" if h==0 else f"{h}시승차총승객수" for h in range(24)]
     cols_a=[f"{h:02d}시하차총승객수" if h==0 else f"{h}시하차총승객수" for h in range(24)]
-    route={r:{radius:dict(activity=0,mid_activity=0) for radius in RADII} for r in universe}
+    route={r:{radius:dict(activity=0,mid_activity=0,boardings=0) for radius in RADII} for r in universe}
     match=defaultdict(int);hospital_activity=Counter();named_activity=defaultdict(int)
     for x in csv_records(may26,"cp949"):
         if x["사용년월"]!="202605":raise ValueError("Only 2026 May is valid")
@@ -82,6 +82,7 @@ def observed_near_stops(may26,universe,near,route_stops):
         dist,hname=near[sid]
         for radius in RADII:
             if dist<=radius:
+                route[r][radius]["boardings"]+=sum(b)
                 route[r][radius]["activity"]+=sum(b)+sum(a)
                 route[r][radius]["mid_activity"]+=sum(b[10:17])+sum(a[10:17])
         if dist<=500:hospital_activity[hname]+=sum(b)+sum(a)
@@ -189,6 +190,7 @@ def main():
            "hospital_name_activity":named.get(route,0)}
         for radius in RADII:
             x[f"general_hospital_{radius}m_activity"]=spatial[route][radius]["activity"]
+            x[f"general_hospital_{radius}m_boardings"]=spatial[route][radius]["boardings"]
         route_rows.append(x)
     write_csv(args.output/"v3_route_spatial_evidence.csv",route_rows)
     result={

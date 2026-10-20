@@ -28,3 +28,9 @@ python medical/historical_policy_spatial_v3.py --may-2025 /absolute/path/202505.
 V7 제출 문안과 V12 현장 기록 규칙은 새 관측을 생성하는 분석기가 아니다. V12 검증 함수와 V13 현장 등록 규칙은 전체 회귀시험에 포함된다. V12 새 GIS 취득 스크립트는 네트워크 작업이므로 오프라인 재현에 포함하지 않는다. 공개 API 관측 수집·암호화 보관은 별도의 GitHub 워크플로이며 위 명령에서 실행하지 않는다. 최신 관측의 정책 게이트 판정은 observations/policy_observed_evidence.csv에서 확인한다.
 
 과거 배포 문안과 버전 기록은 development_history_through_v14.md에 보존한다. 현재 결론은 README와 current_evidence.md를 기준으로 읽는다.
+
+## 공간 비교표와 V11 검산의 필드 계약
+
+`boardings_geolinked_2026`은 해당 노선의 정적 정류장 ID에 연결된 승차량이며 병원 거리 제한이 없다. `general_hospital_800m_activity`는 병원 800m 내 승차+하차 합계다. V11이 검산하는 `general_hospital_800m_boardings`는 같은 거리 범위의 승차만 포함한다. 공간 비교 생성기가 이 마지막 필드를 별도로 출력하며 V11은 그것만 비교한다. 과거 오표기 열 이름을 새 ID 연결량으로 단순 치환하지 않는다. 명시적 승차 필드가 없으면 공간표 재생성을 요구하며 중단한다.
+
+V6의 과거 오표기 비교는 `medical/raw/v3_legacy_spatial_evidence.csv`에 보존한 과거 표를 사용한다. 새 공간표가 생성된 뒤 재실행해도 역사 비교의 분모·의미가 바뀌지 않는다.

@@ -39,7 +39,7 @@ def static_cohort():
     actual={r:len(cohorts[r]) for r in EXPECTED}
     if actual!=EXPECTED:raise ValueError("Static cohort differs: "+repr(actual))
     return cohorts
-def monthly(csv26,cohorts):
+def monthly(csv26,cohorts,reference=None):
     counts=defaultdict(int);allcounts=defaultdict(int)
     for x in rows(csv26,"cp949"):
         if x["사용년월"]!="202605":raise ValueError("Not 2026 May")
@@ -48,13 +48,17 @@ def monthly(csv26,cohorts):
         n=sum(int(x[f"{h:02d}시승차총승객수" if h==0 else f"{h}시승차총승객수"]) for h in range(24))
         allcounts[r]+=n
         if x["표준버스정류장ID"].strip() in cohorts[r]:counts[r]+=n
-    previous={x["route"]:x for x in rows(ROOT/"results/historical_ridership/v3_route_spatial_evidence.csv")}
+    reference=reference or ROOT/"results/historical_ridership/v3_route_spatial_evidence.csv"
+    previous={x["route"]:x for x in rows(reference)}
+    field="general_hospital_800m_boardings"
+    if any(field not in previous[r] for r in cohorts):
+        raise ValueError("Regenerate spatial evidence: explicit hospital-800m boarding field required; do not substitute ID-linked boarding or boarding+alighting activity")
     out=[dict(route=r,near800_stop_ids=len(cohorts[r]),all_boardings=allcounts[r],
            recalculated_near800_boardings=counts[r],
-           legacy_misnamed_v3_geo_linked=int(previous[r]["2026_board_geolinked"]),
-           matches_legacy_misnamed=(counts[r]==int(previous[r]["2026_board_geolinked"])))
-         for r in EXPECTED]
-    if not all(z["matches_legacy_misnamed"] for z in out):raise AssertionError("V3 mismatch")
+           reference_near800_boardings=int(previous[r][field]),
+           matches_near800_boardings=(counts[r]==int(previous[r][field])))
+         for r in cohorts]
+    if not all(z["matches_near800_boardings"] for z in out):raise AssertionError("V3 mismatch")
     return out
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--may26");a=p.parse_args()

@@ -122,7 +122,7 @@ def main():
     opts = parser.parse_args()
     a, b = static_sets(read(BASE / "data" / "route_stops.csv"))
     cases = audit(
-        read(BASE / "results" / "historical_ridership" / "v3_route_spatial_evidence.csv"),
+        read(BASE / "raw" / "v3_legacy_spatial_evidence.csv"),
         read(BASE / "results" / "submission_v5" / "v5_temporal_linkage_audit.csv"), a, b)
     windows = observations(read(BASE.parent / "observations" / "vehicle_window_summary.csv"))
     original = recheck_original(opts.may_2026, a, b) if opts.may_2026 else None

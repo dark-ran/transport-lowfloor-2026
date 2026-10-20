@@ -76,9 +76,9 @@ def audit(a,geo_rows,archived_rows):
         "policy_3_slots":a["screened_cap_3"].get(route,(0,))[0],
         "policy_5_slots":a["screened_cap_5"].get(route,(0,))[0],
         "policy_7_slots":a["screened_cap_7"].get(route,(0,))[0],
-        "may2026_boardings_all_riders":int(geo[route]["2026_board"]),
+        "may2026_boardings_all_riders":int(geo[route].get("boardings_2026",geo[route].get("2026_board"))),
         "may2026_general_hospital_500m_stop_activity_all_riders":
-            int(geo[route]["general_hospital_500m_activity_2026"]),
+            int(geo[route].get("general_hospital_500m_activity",geo[route].get("general_hospital_500m_activity_2026"))),
         "historical_v4_candidate_scope":"IN_SCOPE" if gate else "NOT_IN_V4_SCOPE",
         "published_nominal_headway_archived_v4":"CONFIRMED" if headway else ("NOT_VERIFIED" if gate else "NOT_ASSESSED"),
         "directional_stop_order_archived":"SOME_PAIRS_EXAMPLE" if directional else ("NO_ARCHIVED_ROUTE_SNAPSHOT" if gate else "NOT_ASSESSED"),
