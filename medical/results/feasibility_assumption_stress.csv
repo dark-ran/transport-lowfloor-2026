@@ -1,4 +1,4 @@
 ﻿eligible_highfloor_fraction_assumed,route_max_5,spent,unspent,eligible_non_exception_route_count,allocated_route_count,base_delta_index,changed_dongs,changed_dongs_ge_0p05,bottom_20pct_dongs_changed,bundles
-0.25,True,50,0,145,31,0.00866846493821496,122,14,13,34
-0.5,True,50,0,189,22,0.01296396817869416,104,34,13,25
+0.25,True,50,0,145,31,0.008668464938214958,122,14,13,34
+0.5,True,50,0,189,22,0.012963968178694158,104,34,13,25
 1.0,True,50,0,213,15,0.01757315538942169,75,51,8,17
