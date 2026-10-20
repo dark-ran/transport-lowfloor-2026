@@ -1,3 +1,5 @@
+> 역사 고정 분석: 2026-10-18 두 실행만 대상. 최신 누적 관측은 [현재 근거](../../../docs/current_evidence.md)를 확인한다.
+
 # V14 | V13 독립평가 85점의 T4 원천 재현성 개선
 
 **고정 독립평가:** V13 **85/100점**(기술성 45/50 · 공익성 40/50), V12 85점과 동점. 기준: `교통공모전_평가기준_1.txt` V1.0. V14 독립평가 점수는 **아직 없음**.
@@ -8,8 +10,8 @@ V13 평가 원문 `transport-lowfloor-2026_독립평가_13.txt` 269줄을 실제
 
 V13 제출 ZIP은 30개 차량 위치응답 요약값을 Python `ARCHIVE` 상수로 저장하고 이를 재출력하여 독립 원천 재현성 T4를 4/5점으로 제한받았다. V14는 이 결함을 수정한다.
 
-- 공개 원천 1: [observations/vehicle_timeseries.csv](../../../observations/vehicle_timeseries.csv) (30행, Git Blob SHA-1 `35e3e388795a407c7a1ea35ca6580d653772edc5`).
-- 공개 원천 2: [observations/vehicle_window_summary.csv](../../../observations/vehicle_window_summary.csv) (30행, Git Blob SHA-1 `533d16e06d6127bc6f1f6c018e8d3cf12b631248`).
+- 공개 원천 1: [observations/vehicle_timeseries.csv](../../raw/vehicle_history_20261018/vehicle_timeseries.csv) (30행, Git Blob SHA-1 `35e3e388795a407c7a1ea35ca6580d653772edc5`).
+- 공개 원천 2: [observations/vehicle_window_summary.csv](../../raw/vehicle_history_20261018/vehicle_window_summary.csv) (30행, Git Blob SHA-1 `533d16e06d6127bc6f1f6c018e8d3cf12b631248`).
 - [V14 원천 CSV 검증 및 집계 코드](../../v14_source_position_audit.py)는 **원본 파일을 읽고, Git Blob SHA를 검증하고, 서로 다른 두 CSV의 날짜·시간·노선·방향·조회범위를 30/30 교차 검산**한다. 값이 한 바이트라도 바뀌면 SHA 검사에서 중단한다. [회귀시험](../../test_v14_source_position_audit.py)도 추가했다.
 - 독립 ZIP에는 V13 보존자료와 기존 공개 기록의 수집 메타데이터로 **원본 Git Blob과 바이트 단위 동일하게 복원·검증한 2개 CSV**를 수록했다. 이는 공개 저장소에 고정되어 있는 **보존자료를 복원한 것**이며, 원래 서울시 API 제공 서버에서 역사적 원응답을 새로 다운로드하거나 당시 실차를 직접 관측한 것이 아니다.
 - ZIP 내부 `02_작업/v14_audit.py`와 `test_v14.py` 8개 회귀시험, 실행·교차 검증 영수증과 편집 가능한 4쪽 DOCX/PDF를 보존했다. **ZIP 독립 압축해제 환경에서 코드를 실행해 8/8 통과**.

@@ -91,8 +91,8 @@ def observed_near_stops(may26,universe,near,route_stops):
 def compare(policies,older,newer,geo,named_activity):
     universe=set().union(*(x.keys() for x in policies.values()))
     funcs={
-        "all_board":lambda r:newer[r]["boarding"],
-        "mid_board":lambda r:newer[r]["midday"],
+        "all_board":lambda r:newer[r]["board"],
+        "mid_board":lambda r:newer[r]["mid"],
         "hospital_name_activity":lambda r:named_activity.get(r,0),
     }
     for radius in RADII:
@@ -100,7 +100,7 @@ def compare(policies,older,newer,geo,named_activity):
         funcs[f"hospital_{radius}m_mid_activity"]=lambda r,radius=radius:geo[r][radius]["mid_activity"]
     denom={k:sum(f(r) for r in universe) for k,f in funcs.items()}
     if any(v<=0 for v in denom.values()):raise ValueError("Empty denominator in hospital-demand comparison")
-    older_total=sum(older[r]["boarding"] for r in universe)
+    older_total=sum(older[r]["board"] for r in universe)
     summaries=[]
     for cap,p in ((3,"screened_cap_3"),(5,"screened_cap_5"),(7,"screened_cap_7")):
         values=policies[p]
@@ -109,7 +109,7 @@ def compare(policies,older,newer,geo,named_activity):
         for name,f in funcs.items():
             row[name+"_denominator"]=denom[name]
             row[name+"_gain_pp"]=100*sum(f(r)*added/fleet for r,(added,fleet) in values.items())/denom[name]
-        row["all_board_2025_gain_pp"]=100*sum(older[r]["boarding"]*a/f for r,(a,f) in values.items())/older_total
+        row["all_board_2025_gain_pp"]=100*sum(older[r]["board"]*a/f for r,(a,f) in values.items())/older_total
         summaries.append(row)
     loo=[]
     for removed in sorted(universe,key=int):
@@ -184,8 +184,8 @@ def main():
     write_csv(args.output/"v3_objective_weight_grid.csv",grid)
     route_rows=[]
     for route in sorted(universe,key=int):
-        x={"route":route,"boardings_2025":older[route]["boarding"],
-           "boardings_2026":newer[route]["boarding"],"boardings_geolinked_2026":matched.get(route,0),
+        x={"route":route,"boardings_2025":older[route]["board"],
+           "boardings_2026":newer[route]["board"],"boardings_geolinked_2026":matched.get(route,0),
            "hospital_name_activity":named.get(route,0)}
         for radius in RADII:
             x[f"general_hospital_{radius}m_activity"]=spatial[route][radius]["activity"]
@@ -193,9 +193,9 @@ def main():
     write_csv(args.output/"v3_route_spatial_evidence.csv",route_rows)
     result={
         "status":"COMPARED_FIXED_POLICY_SCENARIOS_NOT_ACTUAL_PASSENGER_EFFECT",
-        "routes_union":len(universe),"2026_ride_records":sum(x["boarding"] for x in newer.values()),
+        "routes_union":len(universe),"2026_ride_records":sum(x["board"] for x in newer.values()),
         "geo_audit":geo_audit,"2026_geolinked_boarding_coverage":
-            sum(matched.values())/sum(x["boarding"] for x in newer.values()),
+            sum(matched.values())/sum(x["board"] for x in newer.values()),
         "loo_winners":{k:dict(Counter(x[k] for x in loo)) for k in ("all_board_winner","hospital_500m_activity_winner")},
         "weight_sensitivity":weight_meta,
         "limitations":["500m is straight-line distance, not accessible walking route",

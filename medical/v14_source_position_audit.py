@@ -21,7 +21,7 @@ def source(path,sha):
     if actual!=sha:raise ValueError("Pinned historical Git source changed: "+path.name)
     with path.open(encoding="utf-8-sig",newline="") as f:return list(csv.DictReader(f))
 
-def recalculate(folder=ROOT/"observations"):
+def recalculate(folder=ROOT/"medical/raw/vehicle_history_20261018"):
     times=source(folder/"vehicle_timeseries.csv",FILES["vehicle_timeseries.csv"])
     windows=source(folder/"vehicle_window_summary.csv",FILES["vehicle_window_summary.csv"])
     data={};tot=defaultdict(int);route=defaultdict(lambda:defaultdict(int));weekdays=set();dates=set()

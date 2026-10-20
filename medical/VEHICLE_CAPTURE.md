@@ -6,10 +6,10 @@
 
 1. [공식 API](https://www.data.go.kr/data/15000332/openapi.do)에 본인 계정으로 활용신청하고 서비스키를 발급받는다.
 2. 저장소 Settings → Secrets and variables → Actions → New repository secret에 이름 `SEOUL_BUS_API_KEY`, 값은 본인 서비스키를 등록한다. 키를 코드·Issue·README·채팅에 쓰지 않는다.
-3. Actions → **Manual real bus snapshot** → Run workflow에서 `scope=full`(기본) 또는 `scope=section`(보조)을 선택한다. API 미등록 시 호출하지 않고 정상 건너뛴다. 자동·정기 수집은 설정하지 않았다.
+3. Actions → **Manual real bus snapshot** → Run workflow에서 `scope=full`(기본) 또는 `scope=section`(보조)을 선택한다. API 미등록 시 호출하지 않고 정상 건너뛴다. 자동 일정은 [현재 자동 수집 안내](AUTOMATED_VEHICLE_OBSERVATIONS.md)를 따른다.
 4. 성공 또는 API 오류 발생 시 실행 화면의 `bus-vehicle-aggregate-실행번호` 아티팩트에서 `vehicle_capture_summary.json`을 내려받는다. 제공기관 요청이 모두 실패해도 워크플로 상태는 성공일 수 있으므로 반드시 집계의 `successful_requests`를 확인한다. 오류 집계가 생성된 것을 관측 성공으로 취급하지 않는다.
 
-기본 `scope=full`은 662·343·3413번 노선을 각각 1회, **총 3회 노선 전체** 질의한다(`getBusPosByRtid`). 정류소 구간 파라미터(`startOrd`, `endOrd`)는 전송하지 않는다. 이 관측은 병원행·귀가행 방향을 확인하지 않는다. 선택형 `scope=section`은 종전과 같이 병원행/귀가행 각 구간 **총 6회** 질의한다(`getBusPosByRouteSt`). 가명처리 salt는 실행마다 새로 생성한다. 차량 단위 JSONL은 임시 실행 환경 밖으로 올리지 않고, 차량 식별값·가명차량키가 없는 **구간별 유형 건수와 성공/빈 응답/오류 집계만** GitHub 아티팩트에 보관한다. 아티팩트 보관기간은 30일이다. 데이터와 배분 분석을 자동 수정·커밋하지 않는다.
+기본 `scope=full`은 `raw/vehicle_candidate_route_ids.json`의 15개 후보 노선을 각각 1회, **총 15회 노선 전체** 질의한다(`getBusPosByRtid`). 정류소 구간 파라미터(`startOrd`, `endOrd`)는 전송하지 않는다. 이 관측은 병원행·귀가행 방향을 확인하지 않는다. 선택형 `scope=section`은 종전과 같이 병원행/귀가행 각 구간 **총 6회** 질의한다(`getBusPosByRouteSt`). 가명처리 salt는 실행마다 새로 생성한다. 차량 단위 JSONL은 임시 실행 환경 밖으로 올리지 않고, 차량 식별값·가명차량키가 없는 **구간별 유형 건수와 성공/빈 응답/오류 집계만** GitHub 아티팩트에 보관한다. 아티팩트 보관기간은 30일이다. 데이터와 배분 분석을 자동 수정·커밋하지 않는다.
 
 ## 로컬 실행
 

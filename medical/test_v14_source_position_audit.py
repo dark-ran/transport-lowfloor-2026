@@ -12,6 +12,16 @@ class AuditV14(unittest.TestCase):
   self.assertEqual((r["totals"]["low_floor_snapshots"],r["totals"]["ordinary_snapshots"]),(236,26))
   self.assertEqual(r["weekday_days"],0)
   self.assertEqual(r["three_polls_per_window_met"],0)
+ def test_historical_source_tampering_is_rejected(self):
+  import tempfile,shutil
+  from pathlib import Path
+  try:from medical import v14_source_position_audit as module
+  except ImportError:import v14_source_position_audit as module
+  with tempfile.TemporaryDirectory() as d:
+   folder=Path(d)
+   for name in module.FILES:shutil.copy2(module.ROOT/'medical/raw/vehicle_history_20261018'/name,folder/name)
+   with (folder/'vehicle_timeseries.csv').open('ab') as f:f.write(b'\n')
+   with self.assertRaises(ValueError):recalculate(folder)
  def test_no_empirical_relabel(self):
   r=recalculate()
   self.assertIsNone(r["real_stop_arrival_times"])

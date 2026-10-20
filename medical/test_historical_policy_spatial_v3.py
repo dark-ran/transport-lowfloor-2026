@@ -35,9 +35,24 @@ class SpatialV3Tests(unittest.TestCase):
         self.assertAlmostEqual(sum(meta["fractional_winner_counts"].values()),286)
         self.assertTrue(all(abs(sum(v for k,v in row.items() if k.startswith("weight_"))-1)<1e-10 for row in rows))
 
+    def test_original_csv_extract_to_spatial_comparison(self):
+        with tempfile.TemporaryDirectory() as d:
+            path=Path(d)/"may.csv"
+            fields=['사용년월','노선번호','표준버스정류장ID','역명',*mod.previous.BOARD,*mod.previous.ALIGHT]
+            with path.open('w',encoding='cp949',newline='') as f:
+                writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader()
+                for route in ['101','102']:
+                    writer.writerow({**dict.fromkeys(fields,1),'사용년월':'202605','노선번호':route,'표준버스정류장ID':route,'역명':'병원'})
+            data=mod.previous.extract(path,2026,{'101','102'})
+            policies={p:{'101':(1,2),'102':(1,2)} for p in mod.POLICIES}
+            geo={r:{radius:{'activity':48,'mid_activity':14} for radius in mod.RADII} for r in data}
+            summaries,loo=mod.compare(policies,data,data,geo,{'101':48,'102':48})
+            self.assertEqual(len(loo),2)
+            self.assertTrue(all(x['all_board_gain_pp']==50 for x in summaries))
+
     def test_policy_gain_same_denominator(self):
         opts={p:{"101":(1,2)} for p in mod.POLICIES}
-        a={"101":{"boarding":10,"midday":5}}
+        a={"101":{"board":10,"mid":5}}
         geo={"101":{radius:{"activity":8,"mid_activity":4} for radius in mod.RADII}}
         with self.assertRaises(ValueError):
             mod.compare(opts,a,a,geo,{"101":8})  # cannot score an empty holdout universe
